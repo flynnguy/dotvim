@@ -1,3 +1,6 @@
 [submodule "bundle/gitv"]
 	path = bundle/gitv
 	url = https://github.com/vim-scripts/gitv.git
+[submodule "bundle/ack"]
+	path = bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
