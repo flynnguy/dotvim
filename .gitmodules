@@ -1,0 +1,3 @@
+[submodule "bundle/gitv"]
+	path = bundle/gitv
+	url = https://github.com/vim-scripts/gitv.git
