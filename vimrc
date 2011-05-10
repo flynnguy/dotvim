@@ -9,57 +9,40 @@
 " nose, django-nose
 
 " ==========================================================
-" Plugins included
+" Pathogen Plugins installed
 " ==========================================================
-" Pathogen
-"     Better Management of VIM plugins 
-"
-" GunDo
-"     Visual Undo in vim with diff's to check the differences
-"
-" Pytest
-"     Runs your Python tests in Vim.
-"
-" Commant-T
-"     Allows easy search and opening of files within a given path 
-"
-" Snipmate
-"     Configurable snippets to avoid re-typing common comands
-"
-" PyFlakes
-"     Underlines and displays errors with Python on-the-fly
-"
-" Fugitive
-"    Interface with git from vim
-"
-" Git
-"    Syntax highlighting for git config files
-"
-" Minibufexpl
-"    Visually display what buffers are currently opened
-"
-" Pydoc
-"    Opens up pydoc within vim
-"
-" Surround
-"    Allows you to surround text with open/close tags
-"
-" Py.test
-"    Run py.test test's from within vim 
-"
-" MakeGreen
-"    Generic test runner that works with nose
-"
+" Pathogen -- Better Management of VIM plugins 
+" Ack -- Like grep but better
+" Commant-T -- Allows easy search and opening of files within a given path 
+" Fugitive -- Interface with git from vim (required for gitv)
+" Git -- Syntax highlighting for git config files
+" Gitv -- virtualize git changes
+" GunDo -- Visual Undo in vim with diff's to check the differences
+" MakeGreen -- Generic test runner that works with nose
+" NERDTree -- Filesystem browser
+" Pep8 -- checks file for pep8 conformity
+" Pydoc -- Opens up pydoc within vim
+" PyFlakes -- Underlines and displays errors with Python on-the-fly
+" Python Match -- extends % to work better with python
+" Ropevim -- Integrates rope with vim
+" Snipmate -- Configurable snippets to avoid re-typing common comands
+" Supertab -- tab completion
+
 " ==========================================================
-" Shortcuts 
+" Non-Pathogen plugins
 " ==========================================================
+" bike.vim - Bicycle Repair Man (python refactoring) integration with vim
+
+
+
+" Pytest -- Runs your Python tests in Vim.
+" Minibufexpl -- Visually display what buffers are currently opened
+" Surround -- Allows you to surround text with open/close tags
+" Py.test -- Run py.test test's from within vim 
+
 set nocompatible              " Don't be compatible with vi
 
-
-" Toggle the tasklist
 map <leader>td <Plug>TaskList
-
-" Run pep8
 let g:pep8_map='<leader>8'
 
 " run py.test's
@@ -73,8 +56,6 @@ nmap <silent><Leader>te <Esc>:Pytest error<CR>
 " Run django tests
 map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
 
-" ,v brings up my .vimrc
-" ,V reloads it -- making all changes active (have to save first)
 map <leader>v :sp ~/.vimrc<CR><C-W>_
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
@@ -190,7 +171,8 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
 if has("gui_running")
   colorscheme flynn
-  set gfn=Monaco\ 6
+  "set gfn=Monaco\ 6
+  set gfn=DejaVu\ Sans\ mono\ 7
   set guioptions-=T
   set lines=85
   set columns=200
@@ -236,21 +218,21 @@ au FileType css set omnifunc=csscomplete#CompleteCSS
 let g:SuperTabDefaultCompletionType = "context"
 
 " Add the virtualenv's site-packages to vim path
-"py << EOF
-"import os.path
-"import sys
-"import vim
-"if os.environ['VIRTUAL_ENV']:
-"    project_base_dir = os.environ['VIRTUAL_ENV']
-"    sys.path.insert(0, project_base_dir)
-"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"    execfile(activate_this, dict(__file__=activate_this))
-"EOF
-"
-"" Load up virtualenv's vimrc if it exists
-"if filereadable($VIRTUAL_ENV . '/.vimrc')
-"    source $VIRTUAL_ENV/.vimrc
-"endif
+py << EOF
+import os.path
+import sys
+import vim
+if os.environ['VIRTUAL_ENV']:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" Load up virtualenv's vimrc if it exists
+if filereadable($VIRTUAL_ENV . '/.vimrc')
+    source $VIRTUAL_ENV/.vimrc
+endif
 
 " My additions
 set diffopt=filler
