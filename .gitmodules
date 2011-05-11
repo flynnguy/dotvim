@@ -37,3 +37,9 @@
 [submodule "bundle/makegreen"]
 	path = bundle/makegreen
 	url = https://github.com/reinh/vim-makegreen
+[submodule "bundle/jQuery"]
+	path = bundle/jQuery
+	url = https://github.com/vim-scripts/jQuery.git
+[submodule "bundle/repeat"]
+	path = bundle/repeat
+	url = https://github.com/vim-scripts/repeat.vim.git
