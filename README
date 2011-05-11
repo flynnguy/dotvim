@@ -3,9 +3,7 @@ This is my .vim/ there are many like it but this is mine.
 Mainly here for backup purposes but feel free to borrow anything, I know I've borrowed from others to create it.
 
 To install:
-git clone git@github.com:flynnguy/dotvim.git ~/.vim/
-cd ~/.vim/
-git submodule update --init
-cd ~/.vim/bundle/command-t/
-rake make
+git clone https://github.com/flynnguy/dotvim.git ~/.vim/
+cd ~/.vim/ && git submodule update --init
+cd ~/.vim/bundle/command-t/ && rake make
 ln -s ~/.vim/vimrc ~/.vimrc
