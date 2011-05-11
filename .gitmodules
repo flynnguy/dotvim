@@ -43,3 +43,9 @@
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://github.com/vim-scripts/repeat.vim.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/minibufexpl"]
+	path = bundle/minibufexpl
+	url = https://github.com/sontek/minibufexpl.vim.git

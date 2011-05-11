@@ -6,7 +6,6 @@
 " Pyflakes
 " Ack
 " Rake & Ruby for command-t
-" nose, django-nose
 
 " ==========================================================
 " Pathogen Plugins installed
@@ -19,6 +18,7 @@
 " Gitv -- virtualize git changes
 " GunDo -- Visual Undo in vim with diff's to check the differences
 " MakeGreen -- Generic test runner that works with nose
+" Minibufexpl -- Visually display what buffers are currently opened
 " NERDTree -- Filesystem browser
 " Pep8 -- checks file for pep8 conformity
 " Pydoc -- Opens up pydoc within vim
@@ -27,6 +27,7 @@
 " Ropevim -- Integrates rope with vim
 " Snipmate -- Configurable snippets to avoid re-typing common comands
 " Supertab -- tab completion
+" Surround -- Allows you to surround text with open/close tags
 
 " ==========================================================
 " Non-Pathogen plugins
@@ -34,27 +35,10 @@
 " bike.vim - Bicycle Repair Man (python refactoring) integration with vim
 
 
-
-" Pytest -- Runs your Python tests in Vim.
-" Minibufexpl -- Visually display what buffers are currently opened
-" Surround -- Allows you to surround text with open/close tags
-" Py.test -- Run py.test test's from within vim 
-
-set nocompatible              " Don't be compatible with vi
+set nocompatible
 
 map <leader>td <Plug>TaskList
 let g:pep8_map='<leader>8'
-
-" run py.test's
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
-
-" Run django tests
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
 
 map <leader>v :sp ~/.vimrc<CR><C-W>_
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -178,7 +162,6 @@ if has("gui_running")
   set columns=200
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc']
-  let NERDTreeShowBookmarks = 1
 endif
 
 " ==========================================================
