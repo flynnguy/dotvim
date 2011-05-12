@@ -61,7 +61,6 @@ map <c-h> <c-w>h
 imap <C-W> <C-O><C-W>
 
 map <leader>n :NERDTreeToggle<CR>
-map <leader>f :CommandT<CR>
 nmap <leader>a <Esc>:Ack! 
 map <leader>g :GundoToggle<CR>
 
@@ -223,7 +222,8 @@ set diffopt+=iwhite
 
 set dictionary+=/usr/share/dict/words
 map <F3> :CommandTBuffer<cr>
-map <F4> :CommandT<cr>
+map <leader>f :CommandT<CR>
+map <leader>b :CommandTBuffer<CR>
 map <F5> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 
@@ -244,6 +244,5 @@ let g:CommandTAcceptSelectionTabMap=['<C-t>']
 let g:CommandTMaxHeight=30
 let g:CommandTMatchWindowAtTop=1
 
-map <leader>b :MiniBufExplorer<CR>
 map <C-tab> :bn<cr>
 map <C-S-tab> :bp<cr>
