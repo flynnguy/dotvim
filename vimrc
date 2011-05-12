@@ -40,8 +40,8 @@ set nocompatible
 map <leader>td <Plug>TaskList
 let g:pep8_map='<leader>8'
 
-map <leader>v :sp ~/.vimrc<CR><C-W>_
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <leader>v :e ~/.vimrc<CR><C-W>_
+map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " open/close the quickfix window
 nmap <leader>c :copen<CR>
@@ -158,7 +158,7 @@ if has("gui_running")
   "set gfn=Monaco\ 6
   set gfn=DejaVu\ Sans\ mono\ 7
   set guioptions-=T
-  set lines=85
+  set lines=78
   set columns=200
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc']
@@ -243,3 +243,5 @@ let g:CommandTAcceptSelectionMap=['<cr>']
 let g:CommandTAcceptSelectionTabMap=['<C-t>']
 let g:CommandTMaxHeight=30
 let g:CommandTMatchWindowAtTop=1
+
+map <leader>b :MiniBufExplorer<CR>
