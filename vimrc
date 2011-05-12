@@ -245,3 +245,5 @@ let g:CommandTMaxHeight=30
 let g:CommandTMatchWindowAtTop=1
 
 map <leader>b :MiniBufExplorer<CR>
+map <C-tab> :bn<cr>
+map <C-S-tab> :bp<cr>
