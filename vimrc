@@ -18,7 +18,6 @@
 " Gitv -- virtualize git changes
 " GunDo -- Visual Undo in vim with diff's to check the differences
 " MakeGreen -- Generic test runner that works with nose
-" Minibufexpl -- Visually display what buffers are currently opened
 " NERDTree -- Filesystem browser
 " Pep8 -- checks file for pep8 conformity
 " Pydoc -- Opens up pydoc within vim
@@ -221,7 +220,7 @@ set diffopt=filler
 set diffopt+=iwhite
 
 set dictionary+=/usr/share/dict/words
-map <F3> :CommandTBuffer<cr>
+map <F2> :bd<cr>:syntax on<cr>
 map <leader>f :CommandT<CR>
 map <leader>b :CommandTBuffer<CR>
 map <F5> :NERDTreeToggle<cr>
@@ -244,5 +243,5 @@ let g:CommandTAcceptSelectionTabMap=['<C-t>']
 let g:CommandTMaxHeight=30
 let g:CommandTMatchWindowAtTop=1
 
-map <C-tab> :bn<cr>
-map <C-S-tab> :bp<cr>
+map <C-tab> gt
+map <C-S-tab> gT
