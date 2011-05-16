@@ -14,19 +14,24 @@
 " Ack -- Like grep but better
 " Commant-T -- Allows easy search and opening of files within a given path 
 " Fugitive -- Interface with git from vim (required for gitv)
+" Gist -- Automating uploading a Gist to Github.com
 " Git -- Syntax highlighting for git config files
 " Gitv -- virtualize git changes
 " GunDo -- Visual Undo in vim with diff's to check the differences
+" jQuery -- jQuery syntax
 " MakeGreen -- Generic test runner that works with nose
+" MRU -- Most Recently Used file list
 " NERDTree -- Filesystem browser
 " Pep8 -- checks file for pep8 conformity
 " Pydoc -- Opens up pydoc within vim
 " PyFlakes -- Underlines and displays errors with Python on-the-fly
 " Python Match -- extends % to work better with python
+" Repeat -- Enables . to repeat more things
 " Ropevim -- Integrates rope with vim
 " Snipmate -- Configurable snippets to avoid re-typing common comands
 " Supertab -- tab completion
 " Surround -- Allows you to surround text with open/close tags
+" Yankring -- Reference previously yanked items
 
 " ==========================================================
 " Non-Pathogen plugins
