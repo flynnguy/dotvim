@@ -142,7 +142,7 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " Show some info, even without statuslines.
 set laststatus=2            " Always show statusline, even if only 1 window.
-set statusline=%<%f\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
+set statusline=%<%f%M\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
 
 " displays tabs with :set list & displays when a line runs off-screen
 "set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
@@ -163,6 +163,7 @@ if has("gui_running")
   set guioptions-=T
   set lines=78
   set columns=200
+  set hidden                " Allow modified buffers to hide in the background
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc']
 endif
