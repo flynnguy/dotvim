@@ -198,6 +198,8 @@ au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
 
+au BufNewFile,BufRead *.sah set filetype=sahi
+
 " ==========================================================
 " SuperTab - Allows us to get code completion with tab
 " ==========================================================
