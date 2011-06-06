@@ -20,7 +20,7 @@ syn keyword sahiFunction            _lastDownloadedFileName _scriptName _logExce
 syn keyword sahiFunction            _writeFile _writeToFile _deleteFile _suiteInfo _writeCSVFile _areEqualArrays _userDataDir _setRecovery _removeRecovery _sessionInfo 
 syn keyword sahiFunction            _renameFile _runUnitTests _fail _dataDrive _condition _setSpeed _selectWindow _selectDomain _userDataPath _evalOnRhino _scriptStatus 
 syn keyword sahiFunction            _flex _stackTrace _dynamicInclude _execute _prompt _confirm _resolvePath _datebox _datetimebox _datetime-localbox _emailbox _monthbox 
-syn keyword sahiFunction            _numberbox _rangebox _telbox _timebox _urlbox _weekbox
+syn keyword sahiFunction            _numberbox _rangebox _telbox _timebox _urlbox _weekbox _include
 
 if version >= 508 || !exists("did_javascript_syn_inits")
   if version < 508
