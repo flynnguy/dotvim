@@ -60,6 +60,13 @@ map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 
+" So linux behaves similarly to mac
+" you could also use c- instead of a- here
+nmap <a-v> "+gP
+imap <a-v> <esc><a-v>i
+vmap <a-c> "+y
+
+
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
 imap <C-W> <C-O><C-W>
@@ -253,3 +260,4 @@ let g:CommandTMatchWindowAtTop=1
 
 map <C-tab> gt
 map <C-S-tab> gT
+let g:pastebin_user='chris'
