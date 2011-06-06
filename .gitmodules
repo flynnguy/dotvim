@@ -55,3 +55,6 @@
 [submodule "bundle/supertab-continued"]
 	path = bundle/supertab-continued
 	url = https://github.com/vim-scripts/SuperTab-continued..git
+[submodule "bundle/web-indent"]
+	path = bundle/web-indent
+	url = https://github.com/garbas/vim-web-indent.git
