@@ -54,9 +54,10 @@ hi WildMenu     term=standout ctermfg=0 ctermbg=14 guifg=Black guibg=Khaki
 hi CursorLine   guibg=#2d2d2d
 hi CursorColumn   guibg=#2d2d2d
 hi Directory   ctermfg=11 guifg=Cyan
-hi DiffAdd     term=bold ctermbg=1 guibg=DarkBlue		
-hi DiffChange	term=bold ctermbg=5 guibg=DarkMagenta
-hi DiffDelete	term=bold ctermfg=9 ctermbg=3 gui=bold guifg=Blue guibg=DarkCyan
+hi DiffAdd     term=bold ctermbg=1 guibg=DarkGreen
+hi DiffChange	term=bold ctermbg=5 guibg=DarkBlue
+hi DiffLine	term=bold ctermbg=5 guibg=DarkMagenta
+hi DiffDelete   term=bold ctermfg=9 ctermbg=3 gui=bold guifg=Black guibg=DarkRed
 hi DiffText	term=reverse cterm=bold ctermbg=12 gui=bold guibg=Red
 hi ErrorMsg	    cterm=bold ctermfg=white ctermbg=red guibg=#592929
 hi FoldColumn	term=standout ctermfg=11 ctermbg=8 guifg=DarkBlue guibg=DarkGrey
