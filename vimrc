@@ -63,7 +63,7 @@ map <c-h> <c-w>h
 " So linux behaves similarly to mac
 " you could also use c- instead of a- here
 nmap <a-v> "+gP
-imap <a-v> <esc><a-v>i
+imap <a-v> <esc>l<a-v>i
 vmap <a-c> "+y
 
 
@@ -97,6 +97,7 @@ set background=dark           " We are using dark background in vim
 set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=full             " <Tab> cycles between all matching choices.
+set viewdir=$HOME/.vim/views
 
 " Ignore these files when completing
 set wildignore+=*.o,*.obj,.git,*.pyc 
@@ -132,6 +133,9 @@ set foldlevel=99            " don't fold by default
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" Delete fugitive buffers when we stop looking at them
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
 """" Reading/Writing
 set noautowrite             " Never write a file unless I request it.
 set noautowriteall          " NEVER.
@@ -142,7 +146,10 @@ set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 
 """" Messages, Info, Status
 set ls=2                    " allways show status line
-set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
+"Commenting out below because there's a similar setting in ubuntu and I can 
+"make just the title bar flash which doesn't seem to slow down my window
+"like the following does
+"set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
 set confirm                 " Y-N-C prompt if closing with unsaved changes.
 set showcmd                 " Show incomplete normal mode commands as I type.
 set report=0                " : commands always print changed line count.
@@ -206,6 +213,9 @@ au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
 
 au BufNewFile,BufRead *.sah set filetype=sahi
+au BufNewFile,BufRead *.json set filetype=javascript
+" Visual Selection and then \j to prettify json
+map <Leader>j !python -m json.tool<CR>
 
 " ==========================================================
 " SuperTab - Allows us to get code completion with tab
