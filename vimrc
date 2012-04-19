@@ -214,6 +214,7 @@ au FileType css set omnifunc=csscomplete#CompleteCSS
 
 au BufNewFile,BufRead *.sah set filetype=sahi
 au BufNewFile,BufRead *.json set filetype=javascript
+au! BufNewFile,BufRead *.pde set ft=arduino
 " Visual Selection and then \j to prettify json
 map <Leader>j !python -m json.tool<CR>
 
