@@ -79,6 +79,11 @@ map <leader>g :GundoToggle<CR>
 map <leader>j :RopeGotoDefinition<CR>
 " Rename whatever the cursor is on (including references to it)
 map <leader>r :RopeRename<CR>
+
+" Allow jk keys to go up/down after Ctrl-P
+inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+
 " ==========================================================
 " Pathogen - Allows us to organize our vim plugins
 " ==========================================================
@@ -181,6 +186,29 @@ if has("gui_running")
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc']
 endif
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type <leader>h to toggle highlighting on/off.
+nnoremap <leader>h :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    au! auto_highlight
+    augroup! auto_highlight
+    setl updatetime=4000
+    echo 'Highlight current word: off'
+    return 0
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
 
 " ==========================================================
 " Python
