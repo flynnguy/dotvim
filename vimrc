@@ -69,7 +69,7 @@ vmap <a-c> "+y
 
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
-imap <C-W> <C-O><C-W>
+" imap <C-W> <C-O><C-W>
 
 map <leader>n :NERDTreeToggle<CR>
 nmap <leader>a <Esc>:Ack! 
