@@ -1,2 +1,9 @@
 snippet pdb
 	import ipdb; ipdb.set_trace()
+snippet prof
+	import hotshot
+	prof = hotshot.Profile("${1}")
+	prof.start()
+	prof.stop()
+	#from hotshot import stats
+	#s = stats.load(""); s.sort_stats("time").print_stats()

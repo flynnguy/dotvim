@@ -42,10 +42,13 @@
 set nocompatible
 
 map <leader>td <Plug>TaskList
+let g:pep8_ignore="E501"
 let g:pep8_map='<leader>8'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+map <leader>s :setlocal spell! spelllang=en_us<CR>
 
 " open/close the quickfix window
 nmap <leader>c :copen<CR>
