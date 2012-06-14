@@ -38,12 +38,20 @@
 " ==========================================================
 " bike.vim - Bicycle Repair Man (python refactoring) integration with vim
 
+" ==========================================================
+" Pathogen - Allows us to organize our vim plugins
+" ==========================================================
+" Load pathogen with docs for all plugins
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 set nocompatible
 
 map <leader>td <Plug>TaskList
-let g:pep8_ignore="E501"
-let g:pep8_map='<leader>8'
+let g:flake8_ignore="E501,E701"
+autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
+let g:syntastic_python_checker_args='--ignore=E501'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -86,14 +94,6 @@ map <leader>r :RopeRename<CR>
 " Allow jk keys to go up/down after Ctrl-P
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-
-" ==========================================================
-" Pathogen - Allows us to organize our vim plugins
-" ==========================================================
-" Load pathogen with docs for all plugins
-filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
 " ==========================================================
 " Basic Settings 
@@ -165,6 +165,9 @@ set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " Show some info, even without statuslines.
 set laststatus=2            " Always show statusline, even if only 1 window.
 set statusline=%<%f%M\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " displays tabs with :set list & displays when a line runs off-screen
 "set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
