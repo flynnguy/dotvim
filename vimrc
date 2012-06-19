@@ -51,7 +51,7 @@ set nocompatible
 map <leader>td <Plug>TaskList
 let g:flake8_ignore="E501,E701"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
-let g:syntastic_python_checker_args='--ignore=E501'
+let g:syntastic_python_checker_args='--ignore=E501,E701'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
