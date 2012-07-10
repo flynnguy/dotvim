@@ -283,7 +283,7 @@ set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
 map <leader>f :CommandT<CR>
 map <leader>b :CommandTBuffer<CR>
-map <F5> :NERDTreeToggle<cr>
+map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 
 let Tlist_Exit_OnlyWindow = 1
