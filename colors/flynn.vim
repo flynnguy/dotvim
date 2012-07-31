@@ -8,8 +8,7 @@
 " :he highlight-groups
 " :he cterm-colors
 
-" your pick:
-set background=dark	" or light
+set background=dark
 hi clear
 if exists("syntax_on")
     syntax reset
@@ -29,68 +28,77 @@ let g:colors_name="flynn"
  	
 
 "hi Normal guifg=grey80 guibg=black
-hi Normal guifg=#f6f3e8 guibg=#242424
-hi NonText		term=bold ctermfg=9 gui=bold guifg=Blue
+hi Normal       guifg=#d6d3c9       guibg=#242424       ctermfg=188     ctermbg=236     gui=NONE            cterm=NONE
+hi NonText		guifg=Blue          guibg=NONE          ctermfg=9       ctermbg=NONE    gui=bold            cterm=bold
+hi Cursor       guifg=NONE          guibg=#656565       ctermfg=5       ctermbg=6       gui=bold            cterm=bold
+hi LineNr		guifg=#999934       guibg=NONE          ctermfg=14      ctermbg=NONE    gui=NONE            cterm=NONE
 
-hi Cursor         cterm=bold ctermfg=5 ctermbg=6 gui=bold guifg=NONE guibg=#656565
-hi LineNr		term=underline ctermfg=14 guifg=Yellow
+hi VertSplit	guifg=slategrey     guibg=grey30        ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=NONE
+hi StatusLine	guifg=#e4e6e1       guibg=#1c4a15       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=bold,reverse      term=reverse 
+hi StatusLineNC	guifg=#e4e6e1       guibg=#163b10       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=reverse           term=reverse 
+hi Folded		guifg=DarkBlue      guibg=DarkGrey      ctermfg=11      ctermbg=8       gui=NONE            cterm=standout          term=standout 
 
-hi VertSplit	guibg=grey30 guifg=slategrey gui=none
-hi StatusLine	term=reverse cterm=bold,reverse guifg=DarkSlateGray guibg=Grey80
-hi StatusLineNC	term=reverse cterm=reverse guifg=DarkSlateGray guibg=Gray90
+hi Title	    guifg=#c23c52       guibg=NONE          ctermfg=13      ctermbg=NONE    gui=bold            cterm=bold              term=bold 
+hi Visual		guifg=DarkBlue      guibg=DarkGrey      ctermfg=NONE    ctermbg=NONE    gui=bold            cterm=reverse           term=reverse 
+hi VisualNOS	guifg=NONE          guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=bold,underline  cterm=bold,underline    term=bold,underline 
 
-hi Folded		term=standout ctermfg=11 ctermbg=8 guifg=DarkBlue guibg=DarkGrey
-hi Title	term=bold ctermfg=13 gui=bold guifg=Magenta
-hi Visual		term=reverse cterm=reverse gui=bold guifg=DarkBlue guibg=DarkGrey
-hi VisualNOS	term=bold,underline cterm=bold,underline gui=bold,underline
-
-hi SpecialKey	term=bold ctermfg=9 guifg=Cyan
-
-hi WildMenu     term=standout ctermfg=0 ctermbg=14 guifg=Black guibg=Khaki	
-
-
+hi SpecialKey	guifg=Cyan          guibg=NONE          ctermfg=9       ctermbg=NONE    gui=NONE            cterm=bold              term=bold 
+hi WildMenu     guifg=Black         guibg=Khaki	        ctermfg=0       ctermbg=14      gui=NONE            cterm=NONE              term=standout 
 
 "hi CursorIM	
-hi CursorLine   guibg=#2d2d2d
-hi CursorColumn   guibg=#2d2d2d
-hi Directory   ctermfg=11 guifg=Cyan
-hi DiffAdd     term=bold ctermbg=1 guibg=DarkGreen
-hi DiffChange	term=bold ctermbg=5 guibg=DarkBlue
-hi DiffLine	term=bold ctermbg=5 guibg=DarkMagenta
-hi DiffDelete   term=bold ctermfg=9 ctermbg=3 gui=bold guifg=Black guibg=DarkRed
-hi DiffText	term=reverse cterm=bold ctermbg=12 gui=bold guibg=Red
-hi ErrorMsg	    cterm=bold ctermfg=white ctermbg=red guibg=#592929
-hi FoldColumn	term=standout ctermfg=11 ctermbg=8 guifg=DarkBlue guibg=DarkGrey
-hi IncSearch	term=reverse cterm=reverse gui=reverse
-hi ModeMsg		term=bold cterm=bold gui=bold
-hi MoreMsg		term=bold ctermfg=10 gui=bold guifg=SeaGreen
-hi Question	term=standout ctermfg=10 gui=bold guifg=Green
-"hi Search		term=reverse ctermfg=0 ctermbg=12 gui=bold guifg=Black guibg=Red
-hi WarningMsg   ctermfg=1	
+hi Cursor       guifg=NONE          guibg=#7a7564       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=NONE
+hi CursorLine   guifg=NONE          guibg=#4a473d       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=NONE
+hi CursorColumn guifg=NONE          guibg=#5e5a4c
+hi Directory    guifg=#60a4db       guibg=NONE          ctermfg=11 
+
+hi DiffAdd      guifg=NONE          guibg=#203320       ctermfg=NONE    ctermbg=1       gui=NONE            cterm=bold              term=bold
+hi DiffChange	guifg=NONE          guibg=#2b3363       ctermfg=NONE    ctermbg=5       gui=NONE            cterm=bold              term=bold
+hi DiffLine	    guifg=NONE          guibg=#2b3363       ctermfg=NONE    ctermbg=5       gui=NONE            cterm=bold              term=bold
+hi DiffDelete   guifg=#c75454       guibg=#5c1b1b       ctermfg=9       ctermbg=3       gui=bold            cterm=bold              term=bold
+hi DiffText	    guifg=#c75454       guibg=#5c1b1b       ctermfg=NONE    ctermbg=12      gui=bold            cterm=bold              term=reverse
+
+hi ErrorMsg	    guifg=NONE          guibg=#592929       ctermfg=white   ctermbg=red     gui=NONE            cterm=bold
+hi FoldColumn	guifg=DarkBlue      guibg=DarkGrey      ctermfg=11      ctermbg=8       gui=NONE            cterm=NONE              term=standout 
+hi IncSearch	guifg=NONE          guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=reverse         cterm=reverse           term=reverse 
+hi ModeMsg		guifg=NONE          guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=bold            cterm=bold              term=bold 
+hi MoreMsg		guifg=SeaGreen      guibg=NONE          ctermfg=10      ctermbg=NONE    gui=bold            cterm=bold              term=bold
+hi Question	    guifg=#57db3d       guibg=NONE          ctermfg=10      ctermbg=NONE    gui=bold            cterm=standout          term=standout
+hi WarningMsg   guifg=NONE          guibg=NONE          ctermfg=1
 "hi Menu		
 "hi Scrollbar	
 "hi Tooltip		
 
 " syntax highlighting groups
-hi Comment     term=bold ctermfg=11 guifg=#99968b
-hi String   ctermfg=14 guifg=#e5786d
-hi Number   guifg=#FF73FD     guibg=NONE        gui=NONE      ctermfg=magenta     ctermbg=NONE        cterm=NONE
+hi Comment      guifg=#99968b       guibg=NONE          ctermfg=11      ctermbg=NONE    gui=NONE            cterm=bold
+hi String       guifg=#e5786d       guibg=NONE          ctermfg=14      ctermbg=NONE    gui=NONE
+hi Number       guifg=#FF73FD       guibg=NONE          ctermfg=magenta ctermbg=NONE    gui=NONE
+hi Exception    guifg=#6ca33c       guibg=NONE
 
-hi Special	    term=bold ctermfg=6 guifg=Orange
-hi Constant	term=underline ctermfg=13 guifg=#ffa0a0
-hi Identifier	term=underline cterm=bold ctermfg=11 guifg=#cae682
-hi PreProc	    term=underline ctermfg=9 guifg=#ff80ff
-"hi Underlined	
-"hi Ignore		
-hi Function     guifg=#95e454
-hi Error		term=reverse ctermfg=14 ctermbg=12 guifg=White guibg=Red
-hi Todo		term=standout ctermfg=0 ctermbg=14 guifg=Blue guibg=Yellow
+hi Special	    guifg=Orange        guibg=NONE          ctermfg=6       ctermbg=NONE    gui=NONE            cterm=bold
+hi Constant	    guifg=#d64f4f       guibg=NONE          ctermfg=13      ctermbg=NONE    gui=NONE
+hi Identifier	guifg=#4d8f4d       guibg=NONE          ctermfg=11      ctermbg=NONE    gui=NONE
+hi PreProc	    guifg=#ff80ff       guibg=NONE          ctermfg=9       ctermbg=NONE    gui=NONE
+hi Underlined	guifg=NONE          guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=underline       cterm=underline
+hi Function     guifg=#88bd5a
+hi Error		guifg=#d6bcbc       guibg=#801717       ctermfg=14      ctermbg=12      gui=NONE            cterm=reverse
+hi Todo		    guifg=#ffff61       guibg=NONE          ctermfg=0       ctermbg=14      gui=NONE            cterm=standout
 
 hi Statement	guifg=#8ac6f2
-hi Type		term=underline ctermfg=10 guifg=#95e454
+hi Type		    guifg=#89c455       guibg=NONE          ctermfg=10      ctermbg=NONE    gui=NONE
+"hi Ignore		
 
 hi pythonDecoratorName  guifg=#f6f3e8
-hi pythonString guifg=#e5786d
+hi pythonString         guifg=#db7777
 "hi pythonRawString guifg=Red
-"hi pythonBuiltin guifg=Red
+hi pythonBuiltin guifg=#1f7817 gui=NONE
 "hi pythonException guifg=Red
+hi Operator     guifg=#3bb330
+hi Keyword      guifg=#64bd17       guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=standout
+hi Pmenu        guifg=#c7d7e3       guibg=#1c5973
+hi PmenuSel     guifg=#1c5973       guibg=#c7d7e3
+hi PmenuSbar    guifg=NONE          guibg=#76abab
+hi PmenuThumb   guifg=#123947       guibg=#76abab
+hi SpellBad     guifg=#b33750       guibg=NONE
+hi MatchParen   guifg=#2ed5ff       guibg=NONE
+hi Folded       guifg=#bdbdbd       guibg=#524a52
+hi FoldColumn   guifg=#bdbdbd       guibg=#524a52
