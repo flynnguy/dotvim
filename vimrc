@@ -180,8 +180,8 @@ set incsearch               " Incrementally search while typing a /regex
 
 highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
+colorscheme flynn
 if has("gui_running")
-  colorscheme flynn
   "set gfn=Monaco\ 6
   set gfn=DejaVu\ Sans\ mono\ 7
   set guioptions-=T
