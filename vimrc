@@ -117,7 +117,6 @@ set completeopt=menuone,longest,preview   " don't select first item, follow typi
 set pumheight=6             " Keep a small completion window
 
 """ Moving Around/Editing
-set cursorline              " have a line indicate the cursor location
 set ruler                   " show the cursor position all the time
 set nostartofline           " Avoid moving cursor to BOL when jumping around
 set virtualedit=block       " Let cursor move past the last char in <C-v> mode
@@ -191,6 +190,7 @@ if has("gui_running")
   set hidden                " Allow modified buffers to hide in the background
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc']
+  set cursorline              " have a line indicate the cursor location
 endif
 
 " Highlight all instances of word under cursor, when idle.
