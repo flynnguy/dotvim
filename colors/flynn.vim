@@ -45,7 +45,6 @@ hi VisualNOS	guifg=NONE          guibg=NONE          ctermfg=NONE    ctermbg=NON
 hi SpecialKey	guifg=Cyan          guibg=NONE          ctermfg=9       ctermbg=NONE    gui=NONE            cterm=bold              term=bold 
 hi WildMenu     guifg=Black         guibg=Khaki	        ctermfg=0       ctermbg=14      gui=NONE            cterm=NONE              term=standout 
 
-"hi CursorIM	
 hi Cursor       guifg=NONE          guibg=#7a7564       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=NONE
 hi CursorLine   guifg=NONE          guibg=#4a473d       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=NONE
 hi CursorColumn guifg=NONE          guibg=#5e5a4c
