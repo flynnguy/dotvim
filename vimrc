@@ -163,6 +163,7 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " Show some info, even without statuslines.
 set laststatus=2            " Always show statusline, even if only 1 window.
+set encoding=utf-8
 set statusline=%<%f%M\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -306,3 +307,4 @@ let g:CommandTMatchWindowAtTop=1
 map <C-tab> gt
 map <C-S-tab> gT
 let g:pastebin_user='chris'
+let g:Powerline_symbols = 'fancy'
