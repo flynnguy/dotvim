@@ -185,7 +185,7 @@ colorscheme flynn
 if has("gui_running")
   "set gfn=Monaco\ 6
   set gfn=DejaVu\ Sans\ mono\ 7
-  set guioptions-=T
+  set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
   set hidden                " Allow modified buffers to hide in the background
