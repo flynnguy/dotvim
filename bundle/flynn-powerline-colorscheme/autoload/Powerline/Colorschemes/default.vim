@@ -61,14 +61,14 @@ let g:Powerline#Colorschemes#default#colorscheme = Pl#Colorscheme#Init([
 		\ }),
 	\
 	\ Pl#Hi#Segments(['fileinfo', 'filename'], {
-		\ 'n': ['white', 'gray4', ['bold']],
-		\ 'N': ['gray7', 'gray1', ['bold']],
+		\ 'n': ['mediumcyan', 'gray4', ['bold']],
+		\ 'N': ['black', 'gray3', ['bold']],
 		\ 'i': ['white', 'darkblue', ['bold']],
 		\ }),
 	\
 	\ Pl#Hi#Segments(['fileinfo.filepath'], {
 		\ 'n': ['gray10'],
-		\ 'N': ['gray5'],
+		\ 'N': ['gray0'],
 		\ 'i': ['mediumcyan'],
 		\ }),
 	\
