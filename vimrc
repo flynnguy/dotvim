@@ -47,6 +47,11 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 set nocompatible
+au FocusLost * :set number
+au FocusGained * :set relativenumber
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+cmap w!! %!sudo tee > /dev/null %
 
 map <leader>td <Plug>TaskList
 let g:flake8_ignore="E501,E701,W806"
@@ -70,6 +75,10 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+nmap <tab><tab> <C-w>w
+
+imap <c-a> <Home>
+imap <c-e> <End>
 
 " So linux behaves similarly to mac
 " you could also use c- instead of a- here
@@ -141,6 +150,12 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " Delete fugitive buffers when we stop looking at them
 autocmd BufReadPost fugitive://* set bufhidden=delete
+nnoremap <leader>gs :Gstatus<cr><c-w>15+
+
+nnoremap <leader>w :w<cr>
+
+nnoremap <leader>[ :bprev<cr>
+nnoremap <leader>] :bnext<cr>
 
 """" Reading/Writing
 set noautowrite             " Never write a file unless I request it.
@@ -175,7 +190,10 @@ set statusline+=%*
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
-"set hlsearch                " Highlight searches by default.
+set hlsearch                " Highlight searches by default.
+map // :nohlsearch<cr>; echo 'Search highlight cleared' <cr>
+" The following opens up a quickfix window with search results
+nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<cr>:copen</cr>
 set incsearch               " Incrementally search while typing a /regex
 
 highlight SpellBad term=underline gui=undercurl guisp=Orange
@@ -258,6 +276,8 @@ augroup json_autocmd
     autocmd FileType json set foldmethod=syntax
 augroup END
 
+au BufNewFile,BufRead *.yaml set foldmethod=marker
+
 au! BufNewFile,BufRead *.pde set ft=arduino
 " Visual Selection and then \j to prettify json
 map <Leader>j !python -m json.tool<CR>
@@ -295,6 +315,8 @@ map <leader>f :CommandT<CR>
 map <leader>b :CommandTBuffer<CR>
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
+vmap <silent> <leader>c "+y
+vmap <silent> <leader>p "+p
 
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_Menu = 1
@@ -316,4 +338,5 @@ let g:CommandTMatchWindowAtTop=1
 map <C-tab> gt
 map <C-S-tab> gT
 let g:pastebin_user='chris'
+let g:pastebin='http://paste.advance.net/'
 let g:Powerline_symbols = 'fancy'
