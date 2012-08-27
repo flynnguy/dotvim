@@ -49,7 +49,7 @@ call pathogen#helptags()
 set nocompatible
 
 map <leader>td <Plug>TaskList
-let g:flake8_ignore="E501,E701"
+let g:flake8_ignore="E501,E701,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
 let g:syntastic_python_checker_args='--ignore=E501,E701'
 
@@ -133,7 +133,6 @@ set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:>         " show matching <> (html mainly) as well
-set foldmethod=indent       " allow us to fold on indents
 set foldlevel=99            " don't fold by default
 
 " close preview window automatically when we move around
@@ -222,7 +221,8 @@ endfunction
 " ==========================================================
 "au BufRead *.py compiler nose
 au FileType python set omnifunc=pythoncomplete#Complete
-au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
 
 " Don't let pyflakes use the quickfix window
 let g:pyflakes_use_quickfix = 0
@@ -248,7 +248,16 @@ au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
 
 au BufNewFile,BufRead *.sah set filetype=sahi
-au BufNewFile,BufRead *.json set filetype=javascript
+au! BufNewFile,BufRead *.json set filetype=json
+augroup json_autocmd
+    autocmd FileType json set autoindent 
+    autocmd FileType json set formatoptions=tcq2l 
+    autocmd FileType json set textwidth=78 shiftwidth=2 
+    autocmd FileType json set softtabstop=2 tabstop=8 
+    autocmd FileType json set expandtab 
+    autocmd FileType json set foldmethod=syntax
+augroup END
+
 au! BufNewFile,BufRead *.pde set ft=arduino
 " Visual Selection and then \j to prettify json
 map <Leader>j !python -m json.tool<CR>
