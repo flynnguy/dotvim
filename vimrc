@@ -340,3 +340,5 @@ map <C-S-tab> gT
 let g:pastebin_user='chris'
 let g:pastebin='http://paste.advance.net/'
 let g:Powerline_symbols = 'fancy'
+
+autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
