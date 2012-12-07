@@ -49,14 +49,12 @@ call pathogen#helptags()
 set nocompatible
 au FocusLost * :set number
 au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
 
 map <leader>td <Plug>TaskList
-let g:flake8_ignore="E501,E701,W806"
+let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
-let g:syntastic_python_checker_args='--ignore=E501,E701'
+let g:syntastic_python_checker_args='--ignore=E501,E701,E401'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -317,6 +315,8 @@ map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 vmap <silent> <leader>c "+y
 vmap <silent> <leader>p "+p
+nmap <silent> <leader>d "_d 
+vmap <silent> <leader>d "_d
 
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_Menu = 1
