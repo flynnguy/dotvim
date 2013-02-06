@@ -91,3 +91,6 @@
 [submodule "bundle/vim-matchit"]
 	path = bundle/vim-matchit
 	url = http://github.com/tsaleh/vim-matchit.git
+[submodule "bundle/jedi-vim"]
+	path = bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
