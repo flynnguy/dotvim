@@ -54,7 +54,8 @@ cmap w!! %!sudo tee > /dev/null %
 map <leader>td <Plug>TaskList
 let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
-let g:syntastic_python_checker_args='--ignore=E501,E701,E401'
+let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
+let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -236,7 +237,8 @@ endfunction
 " Python
 " ==========================================================
 "au BufRead *.py compiler nose
-au FileType python set omnifunc=pythoncomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
+au FileType python set omnifunc=jedi#complete
 au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
 
@@ -285,6 +287,7 @@ map <Leader>j !python -m json.tool<CR>
 " ==========================================================
 " Try different completion methods depending on its context
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
@@ -342,7 +345,8 @@ let g:pastebin='http://paste.advance.net/'
 let g:Powerline_symbols = 'fancy'
 
 map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
-nnoremap <leader>l :ls<cr>:b<space>
-let g:jedi#autocompletion_command = "<C-l>"
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#autocompletion_command = "<S-space>"
+let g:jedi#popup_on_dot = 0
 
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
