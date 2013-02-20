@@ -343,5 +343,6 @@ let g:Powerline_symbols = 'fancy'
 
 map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
 nnoremap <leader>l :ls<cr>:b<space>
+let g:jedi#autocompletion_command = "<C-l>"
 
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
