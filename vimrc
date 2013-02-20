@@ -341,4 +341,7 @@ let g:pastebin_user='chris'
 let g:pastebin='http://paste.advance.net/'
 let g:Powerline_symbols = 'fancy'
 
+map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
+nnoremap <leader>l :ls<cr>:b<space>
+
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
