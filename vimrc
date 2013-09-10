@@ -200,7 +200,7 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 colorscheme flynn
 if has("gui_running")
   "set gfn=Monaco\ 6
-  set gfn=DejaVu\ Sans\ mono\ 7
+  set gfn=Source\ Code\ Pro\ Medium:h10
   set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
