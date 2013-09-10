@@ -32,6 +32,7 @@ hi Normal       guifg=#d6d3c9       guibg=#242424       ctermfg=188     ctermbg=
 hi NonText		guifg=Blue          guibg=NONE          ctermfg=9       ctermbg=NONE    gui=bold            cterm=bold
 hi Cursor       guifg=NONE          guibg=#656565       ctermfg=NONE    ctermbg=241     gui=bold            cterm=bold
 hi LineNr		guifg=#999934       guibg=NONE          ctermfg=14      ctermbg=NONE    gui=NONE            cterm=NONE
+hi SignColumn   guibg=#242424
 
 hi VertSplit	guifg=slategrey     guibg=grey30        ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=NONE
 hi StatusLine	guifg=#e4e6e1       guibg=#1c4a15       ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=bold,reverse      term=reverse 
