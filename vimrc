@@ -346,7 +346,7 @@ let g:Powerline_symbols = 'fancy'
 
 map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
 let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#autocompletion_command = "<S-space>"
+let g:jedi#autocompletion_command = "<C-S-space>"
 let g:jedi#popup_on_dot = 0
 
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
