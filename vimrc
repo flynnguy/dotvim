@@ -199,7 +199,7 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
 colorscheme flynn
 if has("gui_running")
-  set gfn=Sauce\ Code\ Powerline:h10
+  set gfn=Sauce\ Code\ Powerline:h8
   set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
@@ -346,3 +346,12 @@ let g:Powerline_symbols = 'fancy'
 map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
 
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
+let g:airline_powerline_fonts = 1
+
+let g:pymode = 1
+let g:pymode_trim_whitespaces = 1
+let g:pymode_indent = []
+let g:pymode_folding = 1
+let g:pymode_motion = 1
+let g:pymode_doc = 1
+let g:pymode_virtualenv = 1
