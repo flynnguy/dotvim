@@ -200,13 +200,14 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 colorscheme flynn
 if has("gui_running")
   "set gfn=Monaco\ 6
-  set gfn=Source\ Code\ Pro\ Medium:h10
+  "set gfn=Source\ Code\ Pro\ Medium:6
+  set gfn=Source\ Code\ Pro\ Medium\ 6
   set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
   set hidden                " Allow modified buffers to hide in the background
   let NERDTreeShowFiles = 1
-  let NERDTreeIgnore=['\.pyc']
+  let NERDTreeIgnore=['\.pyc$', '^TEST\-.*\.xml$']
   set cursorline              " have a line indicate the cursor location
 endif
 
@@ -238,7 +239,7 @@ endfunction
 " ==========================================================
 "au BufRead *.py compiler nose
 "au FileType python set omnifunc=pythoncomplete#Complete
-au FileType python set omnifunc=jedi#complete
+"au FileType python set omnifunc=jedi#complete
 au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
 
@@ -345,8 +346,8 @@ let g:pastebin='http://paste.advance.net/'
 let g:Powerline_symbols = 'fancy'
 
 map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#autocompletion_command = "<C-S-space>"
-let g:jedi#popup_on_dot = 0
+"let g:jedi#use_tabs_not_buffers = 0
+"let g:jedi#autocompletion_command = "<C-S-space>"
+"let g:jedi#popup_on_dot = 0
 
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
