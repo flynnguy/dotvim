@@ -322,8 +322,8 @@ set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
 map <leader>f :CtrlPMixed<CR>
 map <leader>t :CtrlP<CR>
-map <leader>b CtrlPBuffer<CR>
-map <leader>m CtrlPMRU<CR>
+map <leader>b :CtrlPBuffer<CR>
+map <leader>m :CtrlPMRUFiles<CR>
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 vmap <silent> <leader>c "+y
@@ -355,7 +355,6 @@ let g:airline_powerline_fonts = 1
 
 let g:pymode = 1
 let g:pymode_trim_whitespaces = 1
-let g:pymode_indent = []
 let g:pymode_folding = 1
 let g:pymode_motion = 1
 let g:pymode_doc = 1
