@@ -10,28 +10,37 @@
 " ==========================================================
 " Pathogen Plugins installed
 " ==========================================================
-" Pathogen -- Better Management of VIM plugins 
-" Ack -- Like grep but better
-" Commant-T -- Allows easy search and opening of files within a given path 
-" Fugitive -- Interface with git from vim (required for gitv)
-" Gist -- Automating uploading a Gist to Github.com
-" Git -- Syntax highlighting for git config files
-" Gitv -- virtualize git changes
-" GunDo -- Visual Undo in vim with diff's to check the differences
-" jQuery -- jQuery syntax
-" MakeGreen -- Generic test runner that works with nose
-" MRU -- Most Recently Used file list
-" NERDTree -- Filesystem browser
-" Pep8 -- checks file for pep8 conformity
-" Pydoc -- Opens up pydoc within vim
-" PyFlakes -- Underlines and displays errors with Python on-the-fly
-" Python Match -- extends % to work better with python
-" Repeat -- Enables . to repeat more things
-" Ropevim -- Integrates rope with vim
-" Snipmate -- Configurable snippets to avoid re-typing common comands
-" Supertab -- tab completion
-" Surround -- Allows you to surround text with open/close tags
-" Yankring -- Reference previously yanked items
+" Pathogen              -- Better Management of VIM plugins 
+" Ack                   -- Like grep but better
+" closetag              -- Functions and mappings to close open HTML/XML tags
+" ctpaste-vim           -- Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
+" ctrlp.vim             -- Fuzzy file, buffer, mru, tag, etc finder
+" fugitive              -- Interface with git from vim (required for gitv)
+" gist                  -- Automating uploading a Gist to Github.com
+" git                   -- Syntax highlighting for git config files
+" gitgutter             -- Shows a git diff in the gutter (sign column) and stages/reverts hunks
+" gitv                  -- virtualize git changes
+" gundo                 -- Visual Undo in vim with diff's to check the differences
+" jQuery                -- jQuery syntax
+" MakeGreen             -- Generic test runner that works with nose
+" mru                   -- Most Recently Used file list
+" nerdtree              -- Filesystem browser
+" pep8                  -- checks file for pep8 conformity
+" pydoc                 -- Opens up pydoc within vim
+" python-mode           -- Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box
+" python_match          -- extends % to work better with python
+" repeat                -- Enables . to repeat more things
+" snipmate              -- Configurable snippets to avoid re-typing common comands
+" supertab-continued    -- tab completion
+" surround              -- Allows you to surround text with open/close tags
+" syntastic             -- Syntax checking hacks for vim
+" vim-airline           -- lean & mean status/tabline
+" vim-flake8            -- Underlines and displays errors with Python on-the-fly
+" vim-indent-guides     -- A Vim plugin for visually displaying indent levels in code (\ig)
+" vim-indent-object     -- Vim text objects provide a convenient way to select and operate on various types of objects.
+" vim-matchit           -- extends the existing functionality of "%" key
+" vim-unimpaired        -- pairs of handy bracket mappings
+" webapi-vim            -- interface to Web API (XML, HTML, JSON, HTTP)
 
 " ==========================================================
 " Non-Pathogen plugins
@@ -311,8 +320,10 @@ set diffopt+=iwhite
 
 set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
-map <leader>f :CommandT<CR>
-map <leader>b :CommandTBuffer<CR>
+map <leader>f :CtrlPMixed<CR>
+map <leader>t :CtrlP<CR>
+map <leader>b CtrlPBuffer<CR>
+map <leader>m CtrlPMRU<CR>
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 vmap <silent> <leader>c "+y
@@ -330,12 +341,6 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Display_Prototype = 1
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Win_Width = 40
-
-let g:CommandTCancelMap=['<C-c>', '<ESC>', '<C-[']
-let g:CommandTAcceptSelectionMap=['<cr>']
-let g:CommandTAcceptSelectionTabMap=['<C-t>']
-let g:CommandTMaxHeight=30
-let g:CommandTMatchWindowAtTop=1
 
 map <C-tab> gt
 map <C-S-tab> gT
@@ -355,3 +360,6 @@ let g:pymode_folding = 1
 let g:pymode_motion = 1
 let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
+let g:airline#extensions#tabline#enabled = 1
+
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
