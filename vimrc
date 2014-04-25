@@ -321,7 +321,6 @@ set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
 map <leader>f :CtrlPMixed<CR>
 map <leader>t :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
 map <leader>m :CtrlPMRUFiles<CR>
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
