@@ -5,7 +5,6 @@
 " Pep8 - http://pypi.python.org/pypi/pep8
 " Pyflakes
 " Ack
-" Rake & Ruby for command-t
 
 " ==========================================================
 " Pathogen Plugins installed
