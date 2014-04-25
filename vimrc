@@ -359,4 +359,4 @@ let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
 let g:airline#extensions#tabline#enabled = 1
 
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:20'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:120'
