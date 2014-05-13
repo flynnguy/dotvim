@@ -109,3 +109,6 @@
 [submodule "bundle/vim-virtualenv.git"]
 	path = bundle/vim-virtualenv.git
 	url = https://github.com/jmcantrell/vim-virtualenv.git
+[submodule "bundle/undotree.git"]
+	path = bundle/undotree.git
+	url = https://github.com/mbbill/undotree.git
