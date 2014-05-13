@@ -107,6 +107,8 @@ map <leader>j :RopeGotoDefinition<CR>
 " Rename whatever the cursor is on (including references to it)
 map <leader>r :RopeRename<CR>
 
+nmap <F3> :TagbarToggle<CR>
+
 " Allow jk keys to go up/down after Ctrl-P
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
