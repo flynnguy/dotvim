@@ -350,6 +350,9 @@ map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
 
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_enable_branch = 1
+let g:airline_enable_syntastic = 1
 
 let g:pymode = 1
 let g:pymode_trim_whitespaces = 1
@@ -358,6 +361,5 @@ let g:pymode_motion = 1
 let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
-let g:airline#extensions#tabline#enabled = 1
 
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:120'
