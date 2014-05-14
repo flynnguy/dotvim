@@ -118,3 +118,6 @@
 [submodule "bundle/vim-YankRing.git"]
 	path = bundle/vim-YankRing.git
 	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "bundle/vim-commentary.git"]
+	path = bundle/vim-commentary.git
+	url = https://github.com/tpope/vim-commentary.git
