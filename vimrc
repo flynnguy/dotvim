@@ -374,3 +374,4 @@ let g:pymode_virtualenv = 1
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
 
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:120'
+let g:VimuxUseNearest = 0
