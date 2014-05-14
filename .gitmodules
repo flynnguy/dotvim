@@ -115,3 +115,6 @@
 [submodule "bundle/linediff.vim"]
 	path = bundle/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim.git
+[submodule "bundle/vim-YankRing.git"]
+	path = bundle/vim-YankRing.git
+	url = https://github.com/vim-scripts/YankRing.vim.git
