@@ -209,7 +209,7 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
 colorscheme flynn
 if has("gui_running")
-  set gfn=Sauce\ Code\ Powerline:h8
+  set gfn=Source\ Code\ Pro\ for\ Powerline\ Medium\ 6  " Set for Linux, override below for mac
   set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
@@ -217,6 +217,15 @@ if has("gui_running")
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc$', '^TEST\-.*\.xml$']
   set cursorline              " have a line indicate the cursor location
+endif
+
+if has("mac") && has("gui_running")
+    set gfn=Sauce\ Code\ Powerline:h8
+endif
+
+if !has("mac") && has("gui_running")
+    vnoremap <c-s-c> "+y
+    imap <c-s-v> <esc>"+gpi
 endif
 
 " Highlight all instances of word under cursor, when idle.
