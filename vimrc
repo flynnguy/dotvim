@@ -225,7 +225,7 @@ endif
 
 if !has("mac") && has("gui_running")
     vnoremap <c-s-c> "+y
-    imap <c-s-v> <esc>"+gpi
+    imap <c-s-v> <esc>"+gpa
 endif
 
 " Highlight all instances of word under cursor, when idle.
