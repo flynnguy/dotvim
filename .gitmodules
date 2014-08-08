@@ -76,9 +76,6 @@
 [submodule "bundle/matchit.vim"]
 	path = bundle/matchit.vim
 	url = https://github.com/vimcn/matchit.vim.git
-[submodule "bundle/vim-matchit"]
-	path = bundle/vim-matchit
-	url = http://github.com/tsaleh/vim-matchit.git
 [submodule "bundle/webapi-vim"]
 	path = bundle/webapi-vim
 	url = https://github.com/mattn/webapi-vim.git
