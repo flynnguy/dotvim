@@ -1,6 +1,3 @@
-[submodule "bundle/gitv"]
-	path = bundle/gitv
-	url = https://github.com/vim-scripts/gitv.git
 [submodule "bundle/ack"]
 	path = bundle/ack
 	url = https://github.com/mileszs/ack.vim.git
@@ -16,21 +13,12 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/vim-scripts/The-NERD-tree.git
-[submodule "bundle/pep8"]
-	path = bundle/pep8
-	url = https://github.com/vim-scripts/pep8.git
-[submodule "bundle/pydoc"]
-	path = bundle/pydoc
-	url = https://github.com/fs111/pydoc.vim.git
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
 [submodule "bundle/python_match"]
 	path = bundle/python_match
 	url = https://github.com/vim-scripts/python_match.vim.git
-[submodule "bundle/makegreen"]
-	path = bundle/makegreen
-	url = https://github.com/reinh/vim-makegreen
 [submodule "bundle/jQuery"]
 	path = bundle/jQuery
 	url = https://github.com/vim-scripts/jQuery.git
@@ -43,18 +31,9 @@
 [submodule "bundle/gist"]
 	path = bundle/gist
 	url = https://github.com/vim-scripts/Gist.vim.git
-[submodule "bundle/mru"]
-	path = bundle/mru
-	url = https://github.com/vim-scripts/mru.vim.git
-[submodule "bundle/supertab-continued"]
-	path = bundle/supertab-continued
-	url = https://github.com/vim-scripts/SuperTab-continued..git
 [submodule "bundle/web-indent"]
 	path = bundle/web-indent
 	url = https://github.com/garbas/vim-web-indent.git
-[submodule "bundle/vim-indent-object"]
-	path = bundle/vim-indent-object
-	url = https://github.com/michaeljsmith/vim-indent-object.git
 [submodule "bundle/vim-unimpaired"]
 	path = bundle/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
@@ -85,9 +64,6 @@
 [submodule "bundle/gitgutter"]
 	path = bundle/gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "bundle/vim-indent-guides"]
-	path = bundle/vim-indent-guides
-	url = https://github.com/nathanaelkane/vim-indent-guides.git
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline
@@ -100,15 +76,9 @@
 [submodule "bundle/vim-bufferline"]
 	path = bundle/vim-bufferline
 	url = https://github.com/bling/vim-bufferline
-[submodule "bundle/tagbar.git"]
-	path = bundle/tagbar.git
-	url = https://github.com/majutsushi/tagbar.git
 [submodule "bundle/vim-virtualenv.git"]
 	path = bundle/vim-virtualenv.git
 	url = https://github.com/jmcantrell/vim-virtualenv.git
-[submodule "bundle/undotree.git"]
-	path = bundle/undotree.git
-	url = https://github.com/mbbill/undotree.git
 [submodule "bundle/linediff.vim"]
 	path = bundle/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim.git
@@ -118,6 +88,3 @@
 [submodule "bundle/vim-commentary.git"]
 	path = bundle/vim-commentary.git
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "bundle/vimux.git"]
-	path = bundle/vimux.git
-	url = https://github.com/benmills/vimux.git

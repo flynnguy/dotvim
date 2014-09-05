@@ -126,8 +126,9 @@ set wildmode=full             " <Tab> cycles between all matching choices.
 set viewdir=$HOME/.vim/views
 
 " Ignore these files when completing
-set wildignore+=*.o,*.obj,.git,*.pyc 
+set wildignore+=*.o,*.obj,.git,*.pyc,*.log,*.svn,tags
 set grepprg=ack-grep          " replace the default grep program with ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
 set grepformat=%f:%l:%m
 
 """ Insert completion
@@ -209,7 +210,7 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
 colorscheme flynn
 if has("gui_running")
-  set gfn=Source\ Code\ Pro\ for\ Powerline\ Medium\ 6  " Set for Linux, override below for mac
+  set gfn=Source\ Code\ Pro\ for\ Powerline\ Light\ 6  " Set for Linux, override below for mac
   set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
@@ -330,8 +331,8 @@ set diffopt+=iwhite
 
 set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
-map <leader>f :CtrlPMixed<CR>
-map <leader>t :CtrlP<CR>
+map <leader>t :CtrlPMixed<CR>
+map <leader>f :CtrlP<CR>
 map <leader>m :CtrlPMRUFiles<CR>
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
@@ -371,7 +372,14 @@ let g:pymode_folding = 1
 let g:pymode_motion = 1
 let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
+let g:pymode_rope_lookup_project = 0
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
-
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:120'
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:80'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_lazy_update = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+  \ 'file': '\.pyc$\|\.exe$\|\.so$\|\.dat$|TEST*\.xml$'
+  \ }
 let g:VimuxUseNearest = 0
