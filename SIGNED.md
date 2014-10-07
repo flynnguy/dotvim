@@ -3,19 +3,19 @@
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1
 
-iQIcBAABAgAGBQJUNA0JAAoJEFjSBMMRWusaw5IP/Axm6YzSdqnQrfsgvk86ch//
-tp45wBLi4dDo0okWiBs3PFhga1Nw01kk/UCXC9pdfOcKKDRGyafkNxvirHIQANOi
-wuq+SCYhPLaQuH5MFGq5uFdxV6dMBZ0OlY03+Ica5NK3Tlx2kmVlLIC70Bj5ewWH
-n1YGJadQxAP4X4tgW3tR9X2IQHk+mvBpJ12UskNeduxSUkY3/thlWxyhNAHmf0Yw
-hHD4Uiq7YTNLzqj3Xqjcpak5IObi11u09oI6OSATm1YgLrq0jjaaFU5WPf2tAhFS
-TZYBA1t/O83dYyhQNKgwS01IpYfeoiJiLr2rb5OPIiv08756zyF22pKGqueOjn0Y
-9F8G2cuHd1G3tOzRVegUn6EqHEyBB3XITWynHklwk63fLFAKdFi2cuVlUwLAgUHH
-0qRPQ+xPFSI/oeKN3g+P91JGlrlsDohK4cfEI7ncHz3NOiotijRi/L6wtWEFysnE
-bn+oHmTTl0wyYFVChQGNJlFd0bwbeT9npTaGb6WVr6525ZB+va8IprfVGPafWe0j
-XevZhUAe13HFOugrEdEsus8W59Y9eyhuNcemuPXU/SBbUWSixDptC60WcNN2F20f
-Pchk8gX/Acvd3NfYMbUP8FWrRLbGAnK6gjRVtwoF4z45fkl6h3p5d2irj0AQdwCu
-+CjgupBah3gzHOtxHuqo
-=xJwS
+iQIcBAABAgAGBQJUNA6EAAoJEFjSBMMRWusadesP/3t/YXhzMXcta3VgPMOlSOWk
+2ozawadGQ89KMjQAqI2dgWzOGCyxvGhs/MJHCvO07wLZC/wwqPkWy5s6pwKeC0pJ
+vJ9pzkAeW8JsmTfIgnVNoD9VLFiUMmAiJcFM798zgFLwGwV7n5qEmhVykIjWrZRA
+1OdMuFHYOpOw6TcvQdpZY1z84VnEUHl+PeM1W4StFOT11QDww9guP9tB3OJqeJD+
+f/luyzM1eQjiPOjkJHWS1Ie7EEVR/b5y90H3djES9YJaEFMMStFZeSC/CvieHITo
+h1qqGcIo3M7fItJ96s/niz9OYHowMir7L2EK+WPc06SAZi5L5G/YvQVrDSEZirMM
+2WjQoRrR5N6KOSozdfqDKhL+2V+V7/sl3+RdSP4PPPUCHSiMU/lEDUfzxOxhNTax
+lpteWEJngqqQr5Gd9VHJ9D83q3iVMgRPqoKUuRFQDOrY7bgGD3b49ObtbO6v7x5I
+mGrGEvE/qLazJLbO1xMqzC8+JOgyvmcrOjaseJ/YPs0NKQbBAoJC54qugXCeULs8
+Htv+185fMS63QuuqmMMdnHF0AfaWWMaovqT3cokTzWd0bgXQD9zBDAZi8LAB6KG+
+a3MCocrtOiMrq55pyKrrnCRFJDtfCGb4alk1G+U2AppIKpplZFcR+h6P5wm3a6E7
+zZQA1VkNWWQARdJMH9yL
+=+yE6
 -----END PGP SIGNATURE-----
 
 ```
@@ -284,11 +284,8 @@ size    exec  file                                     contents
 69                          pyflakes                   525b194ed876fe731384b6afedf1436f8667a994be0bc74e2581cde99944fc04                                                                 
                           pyflakes/                                                                                                                                                     
 23                          __init__.py                380baa5e1cbd639b8e220a897b46ef59848520de8b4da463c8ed9f0c339f5bc2                                                                 
-198                         __init__.pyc               b44a847e663c4113bb9475c5cb8b36b824aea56aeb708a70a6bc27ea30daaf18|96237945305031858a7474d91c1bd1b6efd64d7b49562f5b4e5933465d552117
 21891                       checker.py                 7be459dcc51bcea1ad8a10df390ebef9fe8e089cca7633673d2a3511007dfadd                                                                 
-23552                       checker.pyc                0267ac051b3dff83a85b3a650ef5f1c5f538afa0ea53937370435b6dd0bf93fb|beb2d4cfaab19c16f4fba253f29a487a94fe04ec959fbff1c49ab827e8d27e6f
 3107                        messages.py                4fb67b5683e29844f1717656496cd710f5e60d3cb48a362d5bcd676ad8a5e0e8                                                                 
-6878                        messages.pyc               14ddfb15a9f87f72651f64654796991a48bfe925b66dc5096d461971dad17967|82359f2aa2e7f08664797c5e373f6caf16b31295bdee75aefddcf4747dfe054f
                             scripts/                                                                                                                                                    
 0                             __init__.py              e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855                                                                 
 2656                          pyflakes.py              998fc8feb6592aa1fd6cc523c17068f087bd2b98a7f051d99f926bab0ab3e6b6                                                                 
