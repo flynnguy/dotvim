@@ -26,7 +26,6 @@
 " nerdtree              -- Filesystem browser
 " pep8                  -- checks file for pep8 conformity
 " pydoc                 -- Opens up pydoc within vim
-" python-mode           -- Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box
 " python_match          -- extends % to work better with python
 " repeat                -- Enables . to repeat more things
 " snipmate              -- Configurable snippets to avoid re-typing common comands
