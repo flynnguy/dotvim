@@ -92,7 +92,6 @@ nmap <a-v> "+gP
 imap <a-v> <esc>l<a-v>i
 vmap <a-c> "+y
 
-
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
 " imap <C-W> <C-O><C-W>
