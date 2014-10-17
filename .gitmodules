@@ -85,3 +85,6 @@
 [submodule "bundle/vim-commentary.git"]
 	path = bundle/vim-commentary.git
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "bundle/vimfiler"]
+	path = bundle/vimfiler
+	url = https://github.com/Shougo/vimfiler.vim.git
