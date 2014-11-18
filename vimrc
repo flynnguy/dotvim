@@ -13,7 +13,6 @@
 " Ack                   -- Like grep but better
 " closetag              -- Functions and mappings to close open HTML/XML tags
 " ctpaste-vim           -- Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
-" ctrlp.vim             -- Fuzzy file, buffer, mru, tag, etc finder
 " fugitive              -- Interface with git from vim (required for gitv)
 " gist                  -- Automating uploading a Gist to Github.com
 " git                   -- Syntax highlighting for git config files
@@ -50,6 +49,8 @@
 " ==========================================================
 " Load pathogen with docs for all plugins
 filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
@@ -115,7 +116,6 @@ inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 " Basic Settings 
 " ==========================================================
 syntax on                     " syntax highlighing
-filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
 set background=dark           " We are using dark background in vim
 set title                     " show title in console title bar
@@ -332,6 +332,35 @@ map <F2> :bd<cr>:syntax on<cr>
 map <leader>t :CtrlPMixed<CR>
 map <leader>f :CtrlP<CR>
 map <leader>m :CtrlPMRUFiles<CR>
+
+" Start of Unite.vim config
+let g:unite_enable_start_insert = 1
+let g:unite_force_overwrite_statusline = 0
+
+call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+      \ 'ignore_pattern', join([
+      \ '\.git/',
+      \ ], '\|'))
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
+
+autocmd FileType unite call s:unite_settings()
+
+function! s:unite_settings()
+  let b:SuperTabDisabled=1
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <silent><buffer><expr> <C-x> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction
+" End Unite.vim plugin config
+
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 vmap <silent> <leader>c "+y
@@ -372,12 +401,3 @@ let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:20,results:80'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_lazy_update = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-  \ 'file': '\.pyc$\|\.exe$\|\.so$\|\.dat$|TEST*\.xml$'
-  \ }
-let g:VimuxUseNearest = 0
