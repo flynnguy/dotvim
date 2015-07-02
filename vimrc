@@ -219,7 +219,7 @@ if has("gui_running")
 endif
 
 if has("mac") && has("gui_running")
-    set gfn=Sauce\ Code\ Powerline:h8
+    set gfn=Sauce\ Code\ Powerline:h9
 endif
 
 if !has("mac") && has("gui_running")
