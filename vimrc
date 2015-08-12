@@ -5,56 +5,56 @@
 " Pep8 - http://pypi.python.org/pypi/pep8
 " Pyflakes
 " Ack
-
-" ==========================================================
-" Pathogen Plugins installed
-" ==========================================================
-" Pathogen              -- Better Management of VIM plugins 
-" Ack                   -- Like grep but better
-" closetag              -- Functions and mappings to close open HTML/XML tags
-" ctpaste-vim           -- Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
-" fugitive              -- Interface with git from vim (required for gitv)
-" gist                  -- Automating uploading a Gist to Github.com
-" git                   -- Syntax highlighting for git config files
-" gitgutter             -- Shows a git diff in the gutter (sign column) and stages/reverts hunks
-" gitv                  -- virtualize git changes
-" gundo                 -- Visual Undo in vim with diff's to check the differences
-" jQuery                -- jQuery syntax
-" MakeGreen             -- Generic test runner that works with nose
-" mru                   -- Most Recently Used file list
-" nerdtree              -- Filesystem browser
-" pep8                  -- checks file for pep8 conformity
-" pydoc                 -- Opens up pydoc within vim
-" python_match          -- extends % to work better with python
-" repeat                -- Enables . to repeat more things
-" snipmate              -- Configurable snippets to avoid re-typing common comands
-" supertab-continued    -- tab completion
-" surround              -- Allows you to surround text with open/close tags
-" syntastic             -- Syntax checking hacks for vim
-" vim-airline           -- lean & mean status/tabline
-" vim-flake8            -- Underlines and displays errors with Python on-the-fly
-" vim-indent-guides     -- A Vim plugin for visually displaying indent levels in code (\ig)
-" vim-indent-object     -- Vim text objects provide a convenient way to select and operate on various types of objects.
-" vim-matchit           -- extends the existing functionality of "%" key
-" vim-unimpaired        -- pairs of handy bracket mappings
-" webapi-vim            -- interface to Web API (XML, HTML, JSON, HTTP)
-
+"
 " ==========================================================
 " Non-Pathogen plugins
 " ==========================================================
 " bike.vim - Bicycle Repair Man (python refactoring) integration with vim
 
-" ==========================================================
-" Pathogen - Allows us to organize our vim plugins
-" ==========================================================
-" Load pathogen with docs for all plugins
+set nocompatible
 filetype off
 filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
-set nocompatible
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'mileszs/ack.vim'                    " Like grep but better
+Plugin 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
+Plugin 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
+Plugin 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'fatih/vim-go'                       " Go development plugin for Vim
+Plugin 'Valloric/YouCompleteMe.git'         " A code-completion engine for Vim
+Plugin 'SirVer/ultisnips'                   " UltiSnips - The ultimate snippet solution for Vim.
+Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (also used with UltiSnips)
+Plugin 'tpope/vim-commentary.git'           " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
+Plugin 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
+Plugin 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
+Plugin 'tpope/vim-git'                      " Syntax highlighting for git config files
+Plugin 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
+Plugin 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
+Plugin 'scrooloose/syntastic'               " Syntax checking hacks for vim
+Plugin 'vim-scripts/jQuery'                 " jQuery syntax
+Plugin 'vim-scripts/The-NERD-tree'          " Filesystem browser
+Plugin 'vim-scripts/python_match.vim'       " extends % to work better with python
+Plugin 'vim-scripts/repeat.vim'             " Enables . to repeat more things
+Plugin 'vim-scripts/Gist.vim'               " Automating uploading a Gist to Github.com
+Plugin 'altercation/vim-colors-solarized'   " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+Plugin 'nvie/vim-flake8'                    " Underlines and displays errors with Python on-the-fly
+Plugin 'vim-scripts/closetag.vim'           " Functions and mappings to close open HTML/XML tags
+Plugin 'airblade/vim-gitgutter'             " Shows a git diff in the gutter (sign column) and stages/reverts hunks
+Plugin 'jmcantrell/vim-virtualenv'          " Work with python virtualenvs in vim http://www.vim.org/scripts/script.php?script_id=3486
+Plugin 'AndrewRadev/linediff.vim'           " A vim plugin to perform diffs on blocks of code http://www.vim.org/scripts/script.php?script_id=3745
+Plugin 'vim-scripts/YankRing.vim'           " Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
+Plugin 'Shougo/unite.vim'                   " Unite and create user interfaces http://www.vim.org/scripts/script.php?script_id=3396
+Plugin 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
+Plugin 'bling/vim-airline'                  " lean & mean status/tabline
+
+call vundle#end()
+
+let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
+"let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
+
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
@@ -64,6 +64,14 @@ let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
 let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
 let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
+
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsListSnippets = '<c-CR>'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -208,7 +216,6 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
 colorscheme flynn
 if has("gui_running")
-  set gfn=Source\ Code\ Pro\ for\ Powerline\ Light\ 6  " Set for Linux, override below for mac
   set guioptions-=T         " Removes lame icon bar
   set lines=78
   set columns=200
@@ -223,6 +230,7 @@ if has("mac") && has("gui_running")
 endif
 
 if !has("mac") && has("gui_running")
+    set gfn=Source\ Code\ Pro\ for\ Powerline\ Light\ 6  " Set for Linux, override below for mac
     vnoremap <c-s-c> "+y
     imap <c-s-v> <esc>"+gpa
 endif
@@ -298,13 +306,6 @@ au BufNewFile,BufRead *.yaml set foldmethod=marker
 au! BufNewFile,BufRead *.pde set ft=arduino
 " Visual Selection and then \j to prettify json
 map <Leader>j !python -m json.tool<CR>
-
-" ==========================================================
-" SuperTab - Allows us to get code completion with tab
-" ==========================================================
-" Try different completion methods depending on its context
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
 " Add the virtualenv's site-packages to vim path
 py << EOF
@@ -401,3 +402,4 @@ let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
+set relativenumber
