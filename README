@@ -4,15 +4,15 @@ Mainly here for backup purposes but feel free to borrow anything, I know I've bo
 
 To install:
 
-    git clone https://github.com/flynnguy/dotvim.git ~/.vim/
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    ln -s ~/.vim/vimrc ~/.vimrc
+`git clone https://github.com/flynnguy/dotvim.git ~/.vim/`
+`git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+`ln -s ~/.vim/vimrc ~/.vimrc`
 
 Then Launch vim and run
 
-    :PluginInstall
+`:PluginInstall`
 
 Then to finish the YouCompleteMe install:
 
-    cd ~/.vim/bundle/YouCompleteMe
-    ./install.sh --clang-completer
+`cd ~/.vim/bundle/YouCompleteMe`
+`./install.sh --clang-completer`
