@@ -49,6 +49,7 @@ Plugin 'vim-scripts/YankRing.vim'           " Maintains a history of previous ya
 Plugin 'Shougo/unite.vim'                   " Unite and create user interfaces http://www.vim.org/scripts/script.php?script_id=3396
 Plugin 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
 Plugin 'bling/vim-airline'                  " lean & mean status/tabline
+Plugin 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 
 call vundle#end()
 
