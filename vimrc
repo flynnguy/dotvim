@@ -56,6 +56,11 @@ call vundle#end()
 let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
 
+au BufRead,BufNewFile go set foldmethod=syntax
+au BufRead,BufNewFile go set foldnestmax=10
+au BufRead,BufNewFile go set nofoldenable
+au BufRead,BufNewFile go set foldlevel=0
+
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
