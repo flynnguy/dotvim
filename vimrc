@@ -65,8 +65,8 @@ autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
 let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
 let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
 
-let g:ycm_key_list_select_completion=['<TAB>', '<Down>', '<C-j>']
-let g:ycm_key_list_previous_completion=['<S-TAB>', '<Up>', '<C-k>']
+let g:ycm_key_list_select_completion=['<Down>', '<C-j>']
+let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
 
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
