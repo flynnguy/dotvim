@@ -56,10 +56,10 @@ call vundle#end()
 let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
 
-au BufRead,BufNewFile go set foldmethod=syntax
-au BufRead,BufNewFile go set foldnestmax=10
-au BufRead,BufNewFile go set nofoldenable
-au BufRead,BufNewFile go set foldlevel=0
+au BufRead,BufNewFile *.go set foldmethod=syntax
+au BufRead,BufNewFile *.go set foldnestmax=10
+au BufRead,BufNewFile *.go set nofoldenable
+au BufRead,BufNewFile *.go set foldlevel=0
 
 au FocusLost * :set number
 au FocusGained * :set relativenumber
@@ -229,6 +229,10 @@ if has("gui_running")
   let NERDTreeShowFiles = 1
   let NERDTreeIgnore=['\.pyc$', '^TEST\-.*\.xml$']
   set cursorline              " have a line indicate the cursor location
+endif
+
+if has("mac")
+    set macmeta
 endif
 
 if has("mac") && has("gui_running")
@@ -408,4 +412,6 @@ let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
+
+let g:AutoPairsFlyMode = 1
 set relativenumber
