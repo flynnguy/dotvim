@@ -231,6 +231,10 @@ if has("gui_running")
   set cursorline              " have a line indicate the cursor location
 endif
 
+if has("mac")
+    set macmeta
+endif
+
 if has("mac") && has("gui_running")
     set gfn=Sauce\ Code\ Powerline:h9
 endif
@@ -408,4 +412,6 @@ let g:pymode_doc = 1
 let g:pymode_virtualenv = 1
 let g:pymode_rope_lookup_project = 0
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
+
+let g:AutoPairsFlyMode = 1
 set relativenumber
