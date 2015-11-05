@@ -92,10 +92,10 @@ nmap <leader>cc :cclose<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " ctrl-jklm  changes to that split
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+map <c-t>j <c-w>j
+map <c-t>k <c-w>k
+map <c-t>l <c-w>l
+map <c-t>h <c-w>h
 nmap <tab><tab> <C-w>w
 
 imap <c-a> <Home>
