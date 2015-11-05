@@ -61,6 +61,13 @@ au BufRead,BufNewFile *.go set foldnestmax=10
 au BufRead,BufNewFile *.go set nofoldenable
 au BufRead,BufNewFile *.go set foldlevel=0
 
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
