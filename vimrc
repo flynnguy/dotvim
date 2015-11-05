@@ -50,6 +50,7 @@ Plugin 'Shougo/unite.vim'                   " Unite and create user interfaces h
 Plugin 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
 Plugin 'bling/vim-airline'                  " lean & mean status/tabline
 Plugin 'jiangmiao/auto-pairs'               " Auto add trailing quotes
+Plugin 'majutsushi/tagbar'                  " Add tagbar plugin
 
 call vundle#end()
 
