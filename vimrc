@@ -422,4 +422,7 @@ let g:pymode_rope_lookup_project = 0
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace() ### XXX BREAKPOINT"
 
 let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutFastWrap = 1
+let g:AutoPairsShortcutToggle = '<D-p>'
+let g:AutoPairsShortcutFastWrap = '<D-e>'
 set relativenumber
