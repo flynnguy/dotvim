@@ -102,3 +102,5 @@ hi SpellBad     guifg=#b33750       guibg=NONE
 hi MatchParen   guifg=#2ed5ff       guibg=NONE
 hi Folded       guifg=#bdbdbd       guibg=#524a52
 hi FoldColumn   guifg=#bdbdbd       guibg=#524a52
+
+hi ColorColumn ctermbg=0 guibg=#666666

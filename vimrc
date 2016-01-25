@@ -144,6 +144,7 @@ set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set wildmode=full             " <Tab> cycles between all matching choices.
 set viewdir=$HOME/.vim/views
+set colorcolumn=80
 
 " Ignore these files when completing
 set wildignore+=*.o,*.obj,.git,*.pyc,*.log,*.svn,tags
@@ -225,6 +226,7 @@ map // :nohlsearch<cr>; echo 'Search highlight cleared' <cr>
 " The following opens up a quickfix window with search results
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<cr>:copen</cr>
 set incsearch               " Incrementally search while typing a /regex
+set clipboard=unnamed
 
 highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
