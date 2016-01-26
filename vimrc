@@ -39,6 +39,7 @@ Plugin 'vim-scripts/The-NERD-tree'          " Filesystem browser
 Plugin 'vim-scripts/python_match.vim'       " extends % to work better with python
 Plugin 'vim-scripts/repeat.vim'             " Enables . to repeat more things
 Plugin 'vim-scripts/Gist.vim'               " Automating uploading a Gist to Github.com
+Plugin 'vim-scripts/gnupg.vim'              " Allows editing of gpg encrypted files
 Plugin 'altercation/vim-colors-solarized'   " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
 Plugin 'nvie/vim-flake8'                    " Underlines and displays errors with Python on-the-fly
 Plugin 'vim-scripts/closetag.vim'           " Functions and mappings to close open HTML/XML tags
