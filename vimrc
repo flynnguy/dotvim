@@ -15,45 +15,45 @@ set nocompatible
 filetype off
 filetype plugin indent off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'mileszs/ack.vim'                    " Like grep but better
-Plugin 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
-Plugin 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
-Plugin 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc finder.
-Plugin 'fatih/vim-go'                       " Go development plugin for Vim
-Plugin 'Valloric/YouCompleteMe.git'         " A code-completion engine for Vim
-Plugin 'SirVer/ultisnips'                   " UltiSnips - The ultimate snippet solution for Vim.
-Plugin 'honza/vim-snippets'                 " vim-snipmate default snippets (also used with UltiSnips)
-Plugin 'tpope/vim-commentary.git'           " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
-Plugin 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
-Plugin 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
-Plugin 'tpope/vim-git'                      " Syntax highlighting for git config files
-Plugin 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
-Plugin 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
-Plugin 'scrooloose/syntastic'               " Syntax checking hacks for vim
-Plugin 'vim-scripts/jQuery'                 " jQuery syntax
-Plugin 'vim-scripts/The-NERD-tree'          " Filesystem browser
-Plugin 'vim-scripts/python_match.vim'       " extends % to work better with python
-Plugin 'vim-scripts/repeat.vim'             " Enables . to repeat more things
-Plugin 'vim-scripts/Gist.vim'               " Automating uploading a Gist to Github.com
-Plugin 'vim-scripts/gnupg.vim'              " Allows editing of gpg encrypted files
-Plugin 'altercation/vim-colors-solarized'   " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
-Plugin 'nvie/vim-flake8'                    " Underlines and displays errors with Python on-the-fly
-Plugin 'vim-scripts/closetag.vim'           " Functions and mappings to close open HTML/XML tags
-Plugin 'airblade/vim-gitgutter'             " Shows a git diff in the gutter (sign column) and stages/reverts hunks
-Plugin 'jmcantrell/vim-virtualenv'          " Work with python virtualenvs in vim http://www.vim.org/scripts/script.php?script_id=3486
-Plugin 'AndrewRadev/linediff.vim'           " A vim plugin to perform diffs on blocks of code http://www.vim.org/scripts/script.php?script_id=3745
-Plugin 'vim-scripts/YankRing.vim'           " Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
-Plugin 'Shougo/unite.vim'                   " Unite and create user interfaces http://www.vim.org/scripts/script.php?script_id=3396
-Plugin 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
-Plugin 'bling/vim-airline'                  " lean & mean status/tabline
-Plugin 'jiangmiao/auto-pairs'               " Auto add trailing quotes
-Plugin 'majutsushi/tagbar'                  " Add tagbar plugin
+Plug 'mileszs/ack.vim'                    " Like grep but better
+Plug 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
+Plug 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
+Plug 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc finder.
+Plug 'fatih/vim-go'                       " Go development plugin for Vim
+" A code-completion engine for Vim
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer'}
+Plug 'SirVer/ultisnips'                   " UltiSnips - The ultimate snippet solution for Vim.
+Plug 'honza/vim-snippets'                 " vim-snipmate default snippets (also used with UltiSnips)
+Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
+Plug 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
+Plug 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
+Plug 'tpope/vim-git'                      " Syntax highlighting for git config files
+Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
+Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
+Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
+Plug 'vim-scripts/jQuery'                 " jQuery syntax
+Plug 'vim-scripts/The-NERD-tree'          " Filesystem browser
+Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
+Plug 'vim-scripts/repeat.vim'             " Enables . to repeat more things
+Plug 'vim-scripts/Gist.vim'               " Automating uploading a Gist to Github.com
+Plug 'vim-scripts/gnupg.vim'              " Allows editing of gpg encrypted files
+Plug 'altercation/vim-colors-solarized'   " precision colorscheme for the vim text editor http://ethanschoonover.com/solarized
+Plug 'nvie/vim-flake8'                    " Underlines and displays errors with Python on-the-fly
+Plug 'vim-scripts/closetag.vim'           " Functions and mappings to close open HTML/XML tags
+Plug 'airblade/vim-gitgutter'             " Shows a git diff in the gutter (sign column) and stages/reverts hunks
+Plug 'jmcantrell/vim-virtualenv'          " Work with python virtualenvs in vim http://www.vim.org/scripts/script.php?script_id=3486
+Plug 'AndrewRadev/linediff.vim'           " A vim plugin to perform diffs on blocks of code http://www.vim.org/scripts/script.php?script_id=3745
+Plug 'vim-scripts/YankRing.vim'           " Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
+Plug 'Shougo/unite.vim'                   " Unite and create user interfaces http://www.vim.org/scripts/script.php?script_id=3396
+Plug 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
+Plug 'bling/vim-airline'                  " lean & mean status/tabline
+Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
+Plug 'majutsushi/tagbar'                  " Add tagbar plugin
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-call vundle#end()
+call plug#end()
 
 let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
