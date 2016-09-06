@@ -22,10 +22,11 @@ Plug 'tpope/vim-fugitive'                 " Interface with git from vim (require
 Plug 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
 Plug 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc finder.
 Plug 'fatih/vim-go'                       " Go development plugin for Vim
+Plug 'rizzatti/dash.vim'
 " A code-completion engine for Vim
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer'}
-Plug 'SirVer/ultisnips'                   " UltiSnips - The ultimate snippet solution for Vim.
-Plug 'honza/vim-snippets'                 " vim-snipmate default snippets (also used with UltiSnips)
+Plug 'SirVer/ultisnips'          " UltiSnips - The ultimate snippet solution for Vim.
+Plug 'honza/vim-snippets' " Install the snippets
 Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
 Plug 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
 Plug 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
@@ -34,7 +35,7 @@ Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to ch
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
 Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
 Plug 'vim-scripts/jQuery'                 " jQuery syntax
-Plug 'vim-scripts/The-NERD-tree'          " Filesystem browser
+Plug 'vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}  " Filesystem browser
 Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
 Plug 'vim-scripts/repeat.vim'             " Enables . to repeat more things
 Plug 'vim-scripts/Gist.vim'               " Automating uploading a Gist to Github.com
@@ -51,7 +52,8 @@ Plug 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.goog
 Plug 'bling/vim-airline'                  " lean & mean status/tabline
 Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 Plug 'majutsushi/tagbar'                  " Add tagbar plugin
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'urthbound/hound.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -70,6 +72,8 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+"let g:fzf_launcher = "fzf_launcher.sh %s"
+
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
@@ -86,7 +90,8 @@ let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-let g:UltiSnipsListSnippets = '<c-CR>'
+let g:UltiSnipsListSnippets='<c-CR>'
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips" 
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -321,6 +326,10 @@ augroup json_autocmd
     autocmd FileType json set expandtab 
     autocmd FileType json set foldmethod=syntax
 augroup END
+
+autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
+autocmd QuickFixCmdPost *grep* cwindow
 
 au BufNewFile,BufRead *.yaml set foldmethod=marker
 
