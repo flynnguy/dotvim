@@ -15,7 +15,7 @@ set nocompatible
 filetype off
 filetype plugin indent off
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged')         " https://github.com/junegunn/vim-plug
 
 Plug 'mileszs/ack.vim'                    " Like grep but better
 Plug 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
@@ -24,7 +24,10 @@ Plug 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc fi
 Plug 'fatih/vim-go'                       " Go development plugin for Vim
 Plug 'rizzatti/dash.vim'
 " A code-completion engine for Vim
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer'}
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer'}
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'zchee/deoplete-go', {'do': 'make'}
+Plug 'davidhalter/jedi-vim'
 Plug 'SirVer/ultisnips'          " UltiSnips - The ultimate snippet solution for Vim.
 Plug 'honza/vim-snippets' " Install the snippets
 Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
@@ -33,7 +36,13 @@ Plug 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags arou
 Plug 'tpope/vim-git'                      " Syntax highlighting for git config files
 Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
-Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
+" Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
+Plug 'janko-m/vim-test'
+Plug 'neomake/neomake'
+Plug 'zchee/deoplete-jedi'                " Python autocomplete
+Plug 'Shougo/neco-vim'                    " vim autocomplete
+Plug 'SevereOverfl0w/deoplete-github'     " github autocomplete
+Plug 'zchee/deoplete-clang'
 Plug 'vim-scripts/jQuery'                 " jQuery syntax
 Plug 'vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}  " Filesystem browser
 Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
@@ -47,15 +56,19 @@ Plug 'airblade/vim-gitgutter'             " Shows a git diff in the gutter (sign
 Plug 'jmcantrell/vim-virtualenv'          " Work with python virtualenvs in vim http://www.vim.org/scripts/script.php?script_id=3486
 Plug 'AndrewRadev/linediff.vim'           " A vim plugin to perform diffs on blocks of code http://www.vim.org/scripts/script.php?script_id=3745
 Plug 'vim-scripts/YankRing.vim'           " Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
-Plug 'Shougo/unite.vim'                   " Unite and create user interfaces http://www.vim.org/scripts/script.php?script_id=3396
 Plug 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
 Plug 'bling/vim-airline'                  " lean & mean status/tabline
 Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 call plug#end()
+
+let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python'
+
+let g:deoplete#enable_at_startup = 1
 
 let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
@@ -64,6 +77,9 @@ au BufRead,BufNewFile *.go set foldmethod=syntax
 au BufRead,BufNewFile *.go set foldnestmax=10
 au BufRead,BufNewFile *.go set nofoldenable
 au BufRead,BufNewFile *.go set foldlevel=0
+
+" autocmd! BufWritePost,BufEnter * Neomake
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
@@ -81,8 +97,12 @@ cmap w!! %!sudo tee > /dev/null %
 map <leader>td <Plug>TaskList
 let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
-let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
-let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
+" let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
+" let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
+let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
+
+map <F5> <Plug>(go-metalinter)
 
 let g:ycm_key_list_select_completion=['<Down>', '<C-j>']
 let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
@@ -101,16 +121,42 @@ map <leader>s :setlocal spell! spelllang=en_us<CR>
 " open/close the quickfix window
 nmap <leader>c :copen<CR>
 nmap <leader>cc :cclose<CR>
+map <C-n> :cnext<cr>
+map <C-m> :cprevious<cr>
+
+" autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+
+function! s:build_go_files()
+    let l:file = expand('%')
+    if l:file =~# '^\f\+_test\.go$'
+        call go#cmd#Test(0, 1)
+    elseif l:file =~# '^\f\+\.go$'
+        call go#cmd#Build(0)
+    endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<cr>
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
 " for when we forget to use sudo to open/edit a file
 cmap w!! w !sudo tee % >/dev/null
 
 " ctrl-jklm  changes to that split
-map <c-t>j <c-w>j
-map <c-t>k <c-w>k
-map <c-t>l <c-w>l
-map <c-t>h <c-w>h
+" map <c-t>j <c-w>j
+" map <c-t>k <c-w>k
+" map <c-t>l <c-w>l
+" map <c-t>h <c-w>h
 nmap <tab><tab> <C-w>w
+:tnoremap <A-h> <C-\><C-n><C-w>h
+:tnoremap <A-j> <C-\><C-n><C-w>j
+:tnoremap <A-k> <C-\><C-n><C-w>k
+:tnoremap <A-l> <C-\><C-n><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
 
 imap <c-a> <Home>
 imap <c-e> <End>
@@ -126,13 +172,13 @@ vmap <a-c> "+y
 " imap <C-W> <C-O><C-W>
 
 map <leader>n :NERDTreeToggle<CR>
-nmap <leader>a <Esc>:Ack! 
+"nmap <leader>a <Esc>:Ack! 
 map <leader>g :GundoToggle<CR>
 
 " Jump to the definition of whatever the cursor is on
 map <leader>j :RopeGotoDefinition<CR>
 " Rename whatever the cursor is on (including references to it)
-map <leader>r :RopeRename<CR>
+" map <leader>r :RopeRename<CR>
 
 nmap <F3> :TagbarToggle<CR>
 
@@ -217,7 +263,7 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set encoding=utf-8
 set statusline=%<%f%M\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " displays tabs with :set list & displays when a line runs off-screen
@@ -247,9 +293,9 @@ if has("gui_running")
   set cursorline              " have a line indicate the cursor location
 endif
 
-if has("mac")
-    set macmeta
-endif
+" if has("mac")
+"     set macmeta
+" endif
 
 if has("mac") && has("gui_running")
     set gfn=Sauce\ Code\ Powerline:h9
@@ -260,6 +306,10 @@ if !has("mac") && has("gui_running")
     vnoremap <c-s-c> "+y
     imap <c-s-v> <esc>"+gpa
 endif
+if has('nvim') && has("gui_running")
+    call MacSetFont("Sauce Code Powerline", 9)
+endif
+
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
@@ -289,7 +339,8 @@ endfunction
 " ==========================================================
 "au BufRead *.py compiler nose
 "au FileType python set omnifunc=pythoncomplete#Complete
-"au FileType python set omnifunc=jedi#complete
+au FileType python set omnifunc=jedi#complete
+let g:jedi#show_call_signatures = "u"
 au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
 
@@ -337,6 +388,7 @@ au! BufNewFile,BufRead *.pde set ft=arduino
 " Visual Selection and then \j to prettify json
 map <Leader>j !python -m json.tool<CR>
 
+if !has('nvim')
 " Add the virtualenv's site-packages to vim path
 py << EOF
 import os.path
@@ -353,6 +405,7 @@ EOF
 if filereadable($VIRTUAL_ENV . '/.vimrc')
     source $VIRTUAL_ENV/.vimrc
 endif
+endif
 
 " My additions
 set diffopt=filler
@@ -360,37 +413,9 @@ set diffopt+=iwhite
 
 set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
-map <leader>t :CtrlPMixed<CR>
-map <leader>f :CtrlP<CR>
-map <leader>m :CtrlPMRUFiles<CR>
-
-"" Start of Unite.vim config
-"let g:unite_enable_start_insert = 1
-"let g:unite_force_overwrite_statusline = 0
-"
-"call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-"      \ 'ignore_pattern', join([
-"      \ '\.git/',
-"      \ ], '\|'))
-"
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"
-"nnoremap <leader>f :<C-u>Unite -buffer-name=files -start-insert buffer file_rec/async:!<cr>
-"
-"autocmd FileType unite call s:unite_settings()
-"
-"function! s:unite_settings()
-"  let b:SuperTabDisabled=1
-"  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-"  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-"  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-"  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-"  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-"
-"  nmap <buffer> <ESC> <Plug>(unite_exit)
-"endfunction
-"" End Unite.vim plugin config
+map <leader>f :CtrlPMixed<CR>
+" map <leader>t :CtrlP<CR>
+" map <leader>m :CtrlPMRUFiles<CR>
 
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
@@ -410,8 +435,8 @@ let Tlist_Display_Prototype = 1
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Win_Width = 40
 
-map <C-tab> gt
-map <C-S-tab> gT
+map <M-tab> <esc>:tabnext<cr>
+map <M-S-tab> <esc>:tabprevious<cr>
 let g:pastebin_user='chris'
 let g:pastebin='http://paste.advance.net/'
 let g:Powerline_symbols = 'fancy'
