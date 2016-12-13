@@ -79,7 +79,7 @@ hi Constant	    guifg=#d64f4f       guibg=NONE          ctermfg=13      ctermbg=
 hi Identifier	guifg=#4d8f4d       guibg=NONE          ctermfg=113     ctermbg=NONE    gui=NONE
 hi PreProc	    guifg=#ff80ff       guibg=NONE          ctermfg=9       ctermbg=NONE    gui=NONE
 hi Underlined	guifg=NONE          guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=underline       cterm=underline
-hi Function     guifg=#88bd5a
+hi Function     guifg=#88bd5a       guibg=NONE          ctermfg=34      ctermbg=NONE
 hi Error		guifg=#d6bcbc       guibg=#801717       ctermfg=14      ctermbg=12      gui=NONE            cterm=reverse
 hi Todo		    guifg=#ffff61       guibg=NONE          ctermfg=0       ctermbg=14      gui=NONE            cterm=standout
 
@@ -93,7 +93,7 @@ hi pythonString         guifg=#db7777 ctermfg=203
 hi pythonBuiltin guifg=#1f7817 gui=NONE
 "hi pythonException guifg=Red
 hi Operator     guifg=#3bb330
-hi Keyword      guifg=#64bd17       guibg=NONE          ctermfg=NONE    ctermbg=NONE    gui=NONE            cterm=standout
+hi Keyword      guifg=#64bd17       guibg=NONE          ctermfg=28    ctermbg=NONE    gui=NONE
 hi Pmenu        guifg=#c7d7e3       guibg=#1c5973
 hi PmenuSel     guifg=#1c5973       guibg=#c7d7e3
 hi PmenuSbar    guifg=NONE          guibg=#76abab
