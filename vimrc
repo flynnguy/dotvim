@@ -3,7 +3,6 @@
 " Dependencies - Libraries/Applications outside of vim
 " ==========================================================
 " Pep8 - http://pypi.python.org/pypi/pep8
-" Pyflakes
 " Ack
 "
 " ==========================================================
@@ -27,13 +26,15 @@ Plug 'rizzatti/dash.vim'
 " Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer'}
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'zchee/deoplete-go', {'do': 'make'}
-Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
+"Plug 'davidhalter/jedi-vim'
 Plug 'SirVer/ultisnips'          " UltiSnips - The ultimate snippet solution for Vim.
 Plug 'honza/vim-snippets' " Install the snippets
 Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
 Plug 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
 Plug 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
 Plug 'tpope/vim-git'                      " Syntax highlighting for git config files
+Plug 'kannokanno/previm'
 Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
 " Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
@@ -61,6 +62,7 @@ Plug 'bling/vim-airline'                  " lean & mean status/tabline
 Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
+Plug 'mileszs/ack.vim'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 call plug#end()
@@ -69,6 +71,7 @@ let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python'
 
 let g:deoplete#enable_at_startup = 1
+inoremap <expr<tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
@@ -94,6 +97,7 @@ au FocusLost * :set number
 au FocusGained * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
 
+map <leader>p :PrevimOpen<cr>
 map <leader>td <Plug>TaskList
 let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
@@ -149,14 +153,14 @@ cmap w!! w !sudo tee % >/dev/null
 " map <c-t>l <c-w>l
 " map <c-t>h <c-w>h
 nmap <tab><tab> <C-w>w
-:tnoremap <A-h> <C-\><C-n><C-w>h
-:tnoremap <A-j> <C-\><C-n><C-w>j
-:tnoremap <A-k> <C-\><C-n><C-w>k
-:tnoremap <A-l> <C-\><C-n><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 imap <c-a> <Home>
 imap <c-e> <End>
@@ -172,7 +176,7 @@ vmap <a-c> "+y
 " imap <C-W> <C-O><C-W>
 
 map <leader>n :NERDTreeToggle<CR>
-"nmap <leader>a <Esc>:Ack! 
+nmap <leader>a <Esc>:Ack! 
 map <leader>g :GundoToggle<CR>
 
 " Jump to the definition of whatever the cursor is on
@@ -201,8 +205,10 @@ set colorcolumn=80
 " Ignore these files when completing
 set wildignore+=*.o,*.obj,.git,*.pyc,*.log,*.svn,tags
 set grepprg=ack-grep          " replace the default grep program with ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
-set grepformat=%f:%l:%m
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+"set grepformat=%f:%l:%m
 
 """ Insert completion
 set completeopt=menuone,longest,preview   " don't select first item, follow typing in autocomplete
@@ -344,21 +350,6 @@ let g:jedi#show_call_signatures = "u"
 au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
 
-" Don't let pyflakes use the quickfix window
-let g:pyflakes_use_quickfix = 0
-
-" turn of hlsearch and update pyflakes on enter
-au BufRead,BufNewFile *.py nnoremap <buffer><CR> :nohlsearch\|:call PressedEnter()<cr>
-nnoremap <buffer><CR> :nohlsearch\|:call PressedEnter()<cr>
-
-" clear the search buffer when hitting return and update pyflakes checks
-function! PressedEnter()
-    :nohlsearch
-    if &filetype == 'python'
-        :PyflakesUpdate
-    end
-endfunction
-
 " ==========================================================
 " Javascript
 " ==========================================================
@@ -463,3 +454,31 @@ let g:AutoPairsShortcutFastWrap = 1
 let g:AutoPairsShortcutToggle = '<D-p>'
 let g:AutoPairsShortcutFastWrap = '<D-e>'
 set relativenumber
+
+let g:previm_open_cmd = 'open -a Firefox'
+
+" Bits to reload files when things change
+augroup AutoSwap
+        autocmd!
+        autocmd SwapExists *  call AS_HandleSwapfile(expand('<afile>:p'), v:swapname)
+augroup END
+
+function! AS_HandleSwapfile (filename, swapname)
+        " if swapfile is older than file itself, just get rid of it
+        if getftime(v:swapname) < getftime(a:filename)
+                call delete(v:swapname)
+                let v:swapchoice = 'e'
+        endif
+endfunction
+autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
+  \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+
+augroup checktime
+    au!
+    if !has("gui_running")
+        "silent! necessary otherwise throws errors when using command
+        "line window.
+        autocmd BufEnter,CursorHold,CursorHoldI,CursorMoved,CursorMovedI,FocusGained,BufEnter,FocusLost,WinLeave * checktime
+    endif
+augroup END
+" End Bits to reload files when things change
