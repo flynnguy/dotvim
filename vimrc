@@ -64,6 +64,7 @@ Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
 Plug 'mileszs/ack.vim'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 call plug#end()
 
@@ -108,8 +109,8 @@ let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 
 map <F5> <Plug>(go-metalinter)
 
-let g:ycm_key_list_select_completion=['<Down>', '<C-j>']
-let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
+" let g:ycm_key_list_select_completion=['<Down>', '<C-j>']
+" let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
 
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
@@ -132,6 +133,9 @@ map <C-m> :cprevious<cr>
 autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap <leader>t <Plug>(go-test)
 
+" Custom commentstrings
+autocmd FileType sql setlocal commentstring=--\ %s
+
 function! s:build_go_files()
     let l:file = expand('%')
     if l:file =~# '^\f\+_test\.go$'
@@ -153,14 +157,14 @@ cmap w!! w !sudo tee % >/dev/null
 " map <c-t>l <c-w>l
 " map <c-t>h <c-w>h
 nmap <tab><tab> <C-w>w
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 imap <c-a> <Home>
 imap <c-e> <End>
@@ -285,6 +289,7 @@ map // :nohlsearch<cr>; echo 'Search highlight cleared' <cr>
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<cr>:copen</cr>
 set incsearch               " Incrementally search while typing a /regex
 set clipboard=unnamed
+let g:yankring_clipboard_monitor=0
 
 highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
@@ -357,6 +362,7 @@ au BufRead *.js set makeprg=jslint\ %
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
+au BufReadPost *.cps set syntax=javascript
 
 au BufNewFile,BufRead *.sah set filetype=sahi
 au! BufNewFile,BufRead *.json set filetype=json
