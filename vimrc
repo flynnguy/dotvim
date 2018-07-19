@@ -63,6 +63,7 @@ Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
 Plug 'mileszs/ack.vim'
+Plug 'rust-lang/rust.vim'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 
@@ -376,6 +377,7 @@ augroup json_autocmd
 augroup END
 
 autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+autocmd BufRead,BufNewFile *.py set expandtab
 
 autocmd QuickFixCmdPost *grep* cwindow
 
