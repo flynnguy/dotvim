@@ -1,3 +1,5 @@
+init.vim
 .netrwhist
 views/
+plugged/
 autoload/plug.vim

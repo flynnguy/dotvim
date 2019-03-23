@@ -1,1 +1,1 @@
-/Users/cflynn/.vimrc
+/Users/flynn/.vimrc
