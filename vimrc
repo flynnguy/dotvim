@@ -20,14 +20,11 @@ Plug 'mileszs/ack.vim'                    " Like grep but better
 Plug 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
 Plug 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
 Plug 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc finder.
-Plug 'fatih/vim-go'                       " Go development plugin for Vim
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'} " Go development plugin for Vim
 Plug 'rizzatti/dash.vim'
-" A code-completion engine for Vim
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --gocode-completer'}
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'zchee/deoplete-go', {'do': 'make'}
-Plug 'zchee/deoplete-jedi'
-"Plug 'davidhalter/jedi-vim'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'davidhalter/jedi-vim'
+Plug 'wellle/tmux-complete.vim'
 Plug 'SirVer/ultisnips'          " UltiSnips - The ultimate snippet solution for Vim.
 Plug 'honza/vim-snippets' " Install the snippets
 Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
@@ -40,10 +37,7 @@ Plug 'bling/vim-bufferline'               " super simple vim plugin to show the 
 " Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
 Plug 'janko-m/vim-test'
 Plug 'neomake/neomake'
-Plug 'zchee/deoplete-jedi'                " Python autocomplete
 Plug 'Shougo/neco-vim'                    " vim autocomplete
-Plug 'SevereOverfl0w/deoplete-github'     " github autocomplete
-Plug 'zchee/deoplete-clang'
 Plug 'vim-scripts/jQuery'                 " jQuery syntax
 Plug 'vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}  " Filesystem browser
 Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
@@ -64,16 +58,37 @@ Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
 Plug 'mileszs/ack.vim'
 Plug 'rust-lang/rust.vim'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 
 call plug#end()
 
+set completeopt+=preview
+set completeopt+=menu,menuone,noinsert,noselect
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+augroup OmniCompletionSetup
+    autocmd!
+    autocmd FileType c          set omnifunc=ccomplete#Complete
+    autocmd FileType python     set omnifunc=jedi#completions
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType html       set noignorecase
+    autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+augroup END
+
+" let g:jedi#show_call_signatures#popup_on_dot = 0
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#completion_delay = 500
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default = ['file', 'omni', 'keyn', 'dict', 'ulti']
+let g:mucomplete#chains.unite = []
+
+
 let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python'
 
-let g:deoplete#enable_at_startup = 1
-inoremap <expr<tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <expr<tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
@@ -113,10 +128,10 @@ map <F5> <Plug>(go-metalinter)
 " let g:ycm_key_list_select_completion=['<Down>', '<C-j>']
 " let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
 
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-let g:UltiSnipsListSnippets='<c-CR>'
+" let g:UltiSnipsExpandTrigger="<Tab>"
+" let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
+" let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+" let g:UltiSnipsListSnippets='<c-CR>'
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips" 
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
@@ -157,7 +172,7 @@ cmap w!! w !sudo tee % >/dev/null
 " map <c-t>k <c-w>k
 " map <c-t>l <c-w>l
 " map <c-t>h <c-w>h
-nmap <tab><tab> <C-w>w
+" nmap <tab><tab> <C-w>w
 tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
@@ -351,8 +366,8 @@ endfunction
 " ==========================================================
 "au BufRead *.py compiler nose
 "au FileType python set omnifunc=pythoncomplete#Complete
-au FileType python set omnifunc=jedi#complete
-let g:jedi#show_call_signatures = "u"
+" au FileType python set omnifunc=jedi#complete
+" let g:jedi#show_call_signatures = "u"
 au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
 
