@@ -19,7 +19,7 @@ call plug#begin('~/.vim/plugged')         " https://github.com/junegunn/vim-plug
 Plug 'mileszs/ack.vim'                    " Like grep but better
 Plug 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
 Plug 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
-Plug 'kien/ctrlp.vim'                     " Fuzzy file, buffer, mru, tag, etc finder.
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'} " Go development plugin for Vim
 Plug 'rizzatti/dash.vim'
 Plug 'lifepillar/vim-mucomplete'
@@ -34,7 +34,8 @@ Plug 'tpope/vim-git'                      " Syntax highlighting for git config f
 Plug 'kannokanno/previm'
 Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
-" Plug 'scrooloose/syntastic'               " Syntax checking hacks for vim
+" Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 Plug 'janko-m/vim-test'
 Plug 'neomake/neomake'
 Plug 'Shougo/neco-vim'                    " vim autocomplete
@@ -57,8 +58,9 @@ Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
 Plug 'mileszs/ack.vim'
-Plug 'rust-lang/rust.vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 
 call plug#end()
 
@@ -83,6 +85,9 @@ let g:mucomplete#completion_delay = 500
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default = ['file', 'omni', 'keyn', 'dict', 'ulti']
 let g:mucomplete#chains.unite = []
+let g:racer_cmd = "/Users/flynn/.cargo/bin/racer"
+let g:racer_insert_paren = 1
+let g:rustfmt_autosave = 1
 
 
 let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
@@ -120,6 +125,11 @@ let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
 " let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
 " let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
 let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
 
@@ -289,7 +299,7 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set encoding=utf-8
 set statusline=%<%f%M\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
 set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " displays tabs with :set list & displays when a line runs off-screen
@@ -320,9 +330,9 @@ if has("gui_running")
   set cursorline              " have a line indicate the cursor location
 endif
 
-" if has("mac")
-"     set macmeta
-" endif
+if has("mac")
+    let g:rust_clip_command = 'pbcopy'
+endif
 
 if has("mac") && has("gui_running")
     set gfn=Sauce\ Code\ Powerline:h9
@@ -479,6 +489,16 @@ let g:AutoPairsShortcutFastWrap = '<D-e>'
 set relativenumber
 
 let g:previm_open_cmd = 'open -a Firefox'
+
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+nmap <C-S-P> :call SynStack()<CR>
+
+function! SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " Bits to reload files when things change
 augroup AutoSwap
