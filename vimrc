@@ -17,28 +17,27 @@ filetype plugin indent off
 call plug#begin('~/.vim/plugged')         " https://github.com/junegunn/vim-plug
 
 Plug 'mileszs/ack.vim'                    " Like grep but better
-Plug 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
 Plug 'mattn/webapi-vim'                   " interface to Web API (XML, HTML, JSON, HTTP)
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'} " Go development plugin for Vim
 Plug 'rizzatti/dash.vim'
-Plug 'lifepillar/vim-mucomplete'
+" Plug 'lifepillar/vim-mucomplete'
 Plug 'davidhalter/jedi-vim'
 Plug 'wellle/tmux-complete.vim'
-Plug 'SirVer/ultisnips'          " UltiSnips - The ultimate snippet solution for Vim.
-Plug 'honza/vim-snippets' " Install the snippets
+Plug 'honza/vim-snippets'                 " Install the snippets
+Plug 'SirVer/ultisnips'                   " UltiSnips - The ultimate snippet solution for Vim.
 Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
+Plug 'tpope/vim-fugitive'                 " Interface with git from vim (required for gitv)
 Plug 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
 Plug 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
 Plug 'tpope/vim-git'                      " Syntax highlighting for git config files
 Plug 'kannokanno/previm'
 Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
-" Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 Plug 'janko-m/vim-test'
 Plug 'neomake/neomake'
-Plug 'Shougo/neco-vim'                    " vim autocomplete
+Plug 'milkypostman/vim-togglelist'
 Plug 'vim-scripts/jQuery'                 " jQuery syntax
 Plug 'vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}  " Filesystem browser
 Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
@@ -61,6 +60,22 @@ Plug 'mileszs/ack.vim'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug '/usr/local/opt/fzf' 				  " this requires the fzf binary to be installed
+Plug 'junegunn/fzf.vim'					  " this one too
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 call plug#end()
 
@@ -113,8 +128,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-"let g:fzf_launcher = "fzf_launcher.sh %s"
-
 au FocusLost * :set number
 au FocusGained * :set relativenumber
 cmap w!! %!sudo tee > /dev/null %
@@ -130,19 +143,58 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_python_enabled_makers = ['flake8', 'pylint']
 let g:neomake_go_enabled_makers = ['go', 'golint', 'govet']
+let g:neomake_docker_enabled_markers = ['hadolint']
+let g:neomake_yaml_enabled_markers = ['yamllint']
+let g:neomake_rust_enabled_markers = ['rustc', 'cargo']
+" Blow needs:
+" $ brew tap ValeLint/vale
+" $ brew install vale
+let g:neomake_markdown_enabled_markers = ['vale', 'proselint', 'writegood']
+" let g:neomake_ruby_enabled_markers = ['flog', 'mri', 'rubocop', 'reek', 'rubylint']
+" gem install flog reek 
+let g:neomake_ruby_enabled_markers = ['flog', 'rubocop', 'reek']
+" When writing a buffer (no delay).
+call neomake#configure#automake('w')
+" When writing a buffer (no delay), and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" When reading a buffer (after 1s), and when writing (no delay).
+call neomake#configure#automake('rw', 1000)
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 1s; no delay when writing).
+call neomake#configure#automake('nrwi', 500)
+
+let g:neomake_open_list = 2
+" Neomake
+" Gross hack to stop Neomake running when exitting because it creates a zombie cargo check process
+" which holds the lock and never exits. But then, if you only have QuitPre, closing one pane will
+" disable neomake, so BufEnter reenables when you enter another buffer.
+let s:quitting = 0
+au QuitPre *.rs let s:quitting = 1
+au BufEnter *.rs let s:quitting = 0
+au BufWritePost *.rs if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
+let g:neomake_warning_sign = {'text': '?'}
+
 
 map <F5> <Plug>(go-metalinter)
 
 " let g:ycm_key_list_select_completion=['<Down>', '<C-j>']
 " let g:ycm_key_list_previous_completion=['<Up>', '<C-k>']
 
-" let g:UltiSnipsExpandTrigger="<Tab>"
-" let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
-" let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-" let g:UltiSnipsListSnippets='<c-CR>'
-let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips" 
+nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
+nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
+
+
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+let g:UltiSnipsListSnippets='<c-CR>'
+let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories=["~/.vim/plugged/vim-snippets/UltiSnips" ]
+let g:UltiSnipsSnippetsDir="~/.vim/snippets"
+
+"let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 map <leader>v :e ~/.vimrc<CR><C-W>_
 map <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -191,6 +243,18 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Mapping selecting mappings
+" nmap <leader><tab> <plug>(fzf-maps-n)
+" xmap <leader><tab> <plug>(fzf-maps-x)
+" omap <leader><tab> <plug>(fzf-maps-o)
+map <leader><tab> :FZF<CR>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
 
 imap <c-a> <Home>
 imap <c-e> <End>
