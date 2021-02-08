@@ -11,7 +11,7 @@
 " bike.vim - Bicycle Repair Man (python refactoring) integration with vim
 
 set nocompatible
-filetype off
+" filetype off
 filetype plugin indent off
 
 call plug#begin('~/.vim/plugged')         " https://github.com/junegunn/vim-plug
@@ -23,7 +23,7 @@ Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'} " Go development plugin for Vim
 Plug 'rizzatti/dash.vim'
 " Plug 'lifepillar/vim-mucomplete'
 Plug 'davidhalter/jedi-vim'
-Plug 'wellle/tmux-complete.vim'
+" Plug 'wellle/tmux-complete.vim'
 Plug 'honza/vim-snippets'                 " Install the snippets
 Plug 'SirVer/ultisnips'                   " UltiSnips - The ultimate snippet solution for Vim.
 Plug 'tpope/vim-commentary'               " commentary.vim: comment stuff out http://www.vim.org/scripts/script.php?script_id=3695
@@ -34,12 +34,11 @@ Plug 'tpope/vim-git'                      " Syntax highlighting for git config f
 Plug 'kannokanno/previm'
 Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'janko-m/vim-test'
 Plug 'neomake/neomake'
 Plug 'milkypostman/vim-togglelist'
 Plug 'vim-scripts/jQuery'                 " jQuery syntax
-Plug 'vim-scripts/The-NERD-tree', {'on': 'NERDTreeToggle'}  " Filesystem browser
 Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
 Plug 'vim-scripts/repeat.vim'             " Enables . to repeat more things
 Plug 'vim-scripts/Gist.vim'               " Automating uploading a Gist to Github.com
@@ -52,7 +51,8 @@ Plug 'jmcantrell/vim-virtualenv'          " Work with python virtualenvs in vim 
 Plug 'AndrewRadev/linediff.vim'           " A vim plugin to perform diffs on blocks of code http://www.vim.org/scripts/script.php?script_id=3745
 Plug 'vim-scripts/YankRing.vim'           " Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
 Plug 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
-Plug 'bling/vim-airline'                  " lean & mean status/tabline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
 Plug 'majutsushi/tagbar'                  " Add tagbar plugin
 Plug 'urthbound/hound.vim'
@@ -61,9 +61,16 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'rust-lang/rust.vim'
+Plug 'szw/vim-tags'
 Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug '/usr/local/opt/fzf' 				  " this requires the fzf binary to be installed
-Plug 'junegunn/fzf.vim'					  " this one too
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ludovicchabant/vim-gutentags'
+" Plug 'neovim/nvim-lsp'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -72,10 +79,16 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/deoplete-lsp'
+
+" color themes...
+Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'jnurmine/Zenburn'
+Plug 'jacoborus/tender.vim'
 
 call plug#end()
 
@@ -83,16 +96,7 @@ set completeopt+=preview
 set completeopt+=menu,menuone,noinsert,noselect
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
-augroup OmniCompletionSetup
-    autocmd!
-    autocmd FileType c          set omnifunc=ccomplete#Complete
-    autocmd FileType python     set omnifunc=jedi#completions
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType html       set noignorecase
-    autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
-augroup END
+let g:deoplete#enable_at_startup = 1
 
 " let g:jedi#show_call_signatures#popup_on_dot = 0
 let g:mucomplete#enable_auto_at_startup = 1
@@ -104,9 +108,13 @@ let g:racer_cmd = "/Users/flynn/.cargo/bin/racer"
 let g:racer_insert_paren = 1
 let g:rustfmt_autosave = 1
 
+let g:gitgutter_set_sign_backgrounds=0
 
-let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/usr/local/var/pyenv/versions/neovim3/bin/python'
+" let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/chris/.pyenv/versions/neovim3/bin/python'
+
+let g:jedi#completions_enabled = 0
+let g:jedi#use_splits_not_buffers = "right"
 
 " inoremap <expr<tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
@@ -185,6 +193,19 @@ map <F5> <Plug>(go-metalinter)
 nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
 nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
 
+" NERDTree Git Plugin
+" let g:NERDTreeIndicatorMapCustom = {
+"     \ "Modified"  : "✹",
+"     \ "Staged"    : "✚",
+"     \ "Untracked" : "✭",
+"     \ "Renamed"   : "➜",
+"     \ "Unmerged"  : "═",
+"     \ "Deleted"   : "✖",
+"     \ "Dirty"     : "✗",
+"     \ "Clean"     : "✔︎",
+"     \ 'Ignored'   : '☒',
+"     \ "Unknown"   : "?"
+"     \ }
 
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
@@ -305,7 +326,7 @@ endif
 "set grepformat=%f:%l:%m
 
 """ Insert completion
-set completeopt=menuone,longest,preview   " don't select first item, follow typing in autocomplete
+" set completeopt=menuone,longest,preview   " don't select first item, follow typing in autocomplete
 set pumheight=6             " Keep a small completion window
 
 """ Moving Around/Editing
@@ -363,7 +384,7 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set encoding=utf-8
 set statusline=%<%f%M\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " displays tabs with :set list & displays when a line runs off-screen
@@ -383,33 +404,49 @@ let g:yankring_clipboard_monitor=0
 
 highlight SpellBad term=underline gui=undercurl guisp=Orange
 """" Display
-colorscheme flynn
+" colorscheme flynn
+" colorscheme gruvbox
+
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
+
+" colorscheme zenburn
+
+" colorscheme tender
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let g:airline_theme = 'tender'
+
+if (has("termguicolors"))
+    set termguicolors
+endif
 if has("gui_running")
-  set guioptions-=T         " Removes lame icon bar
-  set lines=78
-  set columns=200
-  set hidden                " Allow modified buffers to hide in the background
-  let NERDTreeShowFiles = 1
-  let NERDTreeIgnore=['\.pyc$', '^TEST\-.*\.xml$']
-  set cursorline              " have a line indicate the cursor location
+set guioptions-=T         " Removes lame icon bar
+set lines=78
+set columns=200
+set hidden                " Allow modified buffers to hide in the background
+let NERDTreeShowFiles = 1
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore=['\.pyc$', '^TEST\-.*\.xml$']
+set cursorline              " have a line indicate the cursor location
 endif
 
 if has("mac")
     let g:rust_clip_command = 'pbcopy'
 endif
 
-if has("mac") && has("gui_running")
-    set gfn=Sauce\ Code\ Powerline:h9
-endif
+" if has("mac") && has("gui_running")
+"     set gfn=Sauce\ Code\ Powerline:h9
+" endif
 
-if !has("mac") && has("gui_running")
-    set gfn=Source\ Code\ Pro\ for\ Powerline\ Light\ 6  " Set for Linux, override below for mac
-    vnoremap <c-s-c> "+y
-    imap <c-s-v> <esc>"+gpa
-endif
-if has('nvim') && has("gui_running")
-    call MacSetFont("Sauce Code Powerline", 9)
-endif
+" if !has("mac") && has("gui_running")
+"     set gfn=Source\ Code\ Pro\ for\ Powerline\ Light\ 6  " Set for Linux, override below for mac
+"     vnoremap <c-s-c> "+y
+"     imap <c-s-v> <esc>"+gpa
+" endif
+" if has('nvim') && has("gui_running")
+"     " call MacSetFont("Sauce Code Powerline", 9)
+"     call MacSetFont("Source Code Pro for Powerline Light", 9)
+" endif
 
 
 " Highlight all instances of word under cursor, when idle.
@@ -417,22 +454,22 @@ endif
 " Type <leader>h to toggle highlighting on/off.
 nnoremap <leader>h :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 function! AutoHighlightToggle()
-  let @/ = ''
-  if exists('#auto_highlight')
+let @/ = ''
+if exists('#auto_highlight')
     au! auto_highlight
     augroup! auto_highlight
     setl updatetime=4000
     echo 'Highlight current word: off'
     return 0
-  else
+else
     augroup auto_highlight
-      au!
-      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    au!
+    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
     augroup end
     setl updatetime=500
     echo 'Highlight current word: ON'
     return 1
-  endif
+endif
 endfunction
 
 " ==========================================================
@@ -460,12 +497,13 @@ augroup json_autocmd
     autocmd FileType json set autoindent 
     autocmd FileType json set formatoptions=tcq2l 
     autocmd FileType json set textwidth=78 shiftwidth=2 
-    autocmd FileType json set softtabstop=2 tabstop=8 
     autocmd FileType json set expandtab 
     autocmd FileType json set foldmethod=syntax
 augroup END
 
 autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType javascript setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
 autocmd BufRead,BufNewFile *.py set expandtab
 
 autocmd QuickFixCmdPost *grep* cwindow
@@ -501,7 +539,12 @@ set diffopt+=iwhite
 
 set dictionary+=/usr/share/dict/words
 map <F2> :bd<cr>:syntax on<cr>
-map <leader>f :CtrlPMixed<CR>
+map <leader>f :Files<cr>
+nnoremap <silent> <leader>g :GFiles<cr>
+nnoremap <silent> <leader>o :Buffers<cr>
+nnoremap <silent> <leader>r :Rg! 
+
+" map <leader>f :CtrlPMixed<CR>
 " map <leader>t :CtrlP<CR>
 " map <leader>m :CtrlPMRUFiles<CR>
 
@@ -523,6 +566,9 @@ let Tlist_Display_Prototype = 1
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
 let Tlist_Win_Width = 40
 
+let g:vim_tags_ctags_binary = '/usr/local/bin/ctags'
+let g:vim_tags_ignore_files = ['.gitignore', '.svnignore', '.cvsignore', 'node-modules']
+
 map <M-tab> <esc>:tabnext<cr>
 map <M-S-tab> <esc>:tabprevious<cr>
 let g:pastebin_user='chris'
@@ -534,6 +580,7 @@ map <f12> :!ctags -R --exclude='*.js' --python-kinds=-iv .
 autocmd FileType html let b:match_words='<:>,<\@<=\([^/][^ \t>]*\)[^>]*\%(>\|$\):<\@<=/\1>'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 
@@ -553,6 +600,35 @@ let g:AutoPairsShortcutFastWrap = '<D-e>'
 set relativenumber
 
 let g:previm_open_cmd = 'open -a Firefox'
+
+"--ALE--
+hi clear ALEErrorSign
+hi clear ALEWarningSign
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_error = '‚úò'
+let g:ale_sign_warning = '‚óã'
+hi Error    ctermfg=204 ctermbg=NONE guifg=#ff5f87 guibg=NONE
+hi Warning  ctermfg=178 ctermbg=NONE guifg=#D7AF00 guibg=NONE
+hi ALEError ctermfg=204 guifg=#ff5f87 ctermbg=52 guibg=#5f0000 cterm=undercurl gui=undercurl
+hi link ALEErrorSign    Error
+hi link ALEWarningSign  Warning
+
+let g:ale_linters = {
+            \ 'python': ['pylint'],
+            \ 'javascript': ['eslint'],
+            \ 'go': ['gobuild', 'gofmt'],
+            \ 'rust': ['rls']
+            \}
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'python': ['autopep8'],
+            \ 'javascript': ['eslint'],
+            \ 'go': ['gofmt', 'goimports'],
+            \ 'rust': ['rustfmt']
+            \}
+let g:ale_fix_on_save = 1
+
+set tags=tags
 
 map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 nmap <C-S-P> :call SynStack()<CR>
@@ -578,7 +654,7 @@ function! AS_HandleSwapfile (filename, swapname)
         endif
 endfunction
 autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
-  \ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+\ if isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
 
 augroup checktime
     au!
