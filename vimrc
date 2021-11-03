@@ -31,13 +31,15 @@ Plug 'tpope/vim-fugitive'                 " Interface with git from vim (require
 Plug 'tpope/vim-unimpaired'               " pairs of handy bracket mappings
 Plug 'tpope/vim-surround'                 " add/remove/change [](){}<>/tags around text
 Plug 'tpope/vim-git'                      " Syntax highlighting for git config files
+Plug 'vim-scripts/indentpython.vim'
 Plug 'kannokanno/previm'
 Plug 'sjl/gundo.vim'                      " Visual Undo in vim with diff's to check the differences
 Plug 'bling/vim-bufferline'               " super simple vim plugin to show the list of buffers in the command bar
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'janko-m/vim-test'
 Plug 'neomake/neomake'
 Plug 'milkypostman/vim-togglelist'
+Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/jQuery'                 " jQuery syntax
 Plug 'vim-scripts/python_match.vim'       " extends % to work better with python
 Plug 'vim-scripts/repeat.vim'             " Enables . to repeat more things
@@ -51,6 +53,7 @@ Plug 'jmcantrell/vim-virtualenv'          " Work with python virtualenvs in vim 
 Plug 'AndrewRadev/linediff.vim'           " A vim plugin to perform diffs on blocks of code http://www.vim.org/scripts/script.php?script_id=3745
 Plug 'vim-scripts/YankRing.vim'           " Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
 Plug 'flynnguy/ctpaste-vim'               " Paste to CodeTrunk (http://code.google.com/p/codetrunk/)
+Plug 'psf/black', {'tag': '19.10b0'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'               " Auto add trailing quotes
@@ -104,21 +107,20 @@ let g:mucomplete#completion_delay = 500
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default = ['file', 'omni', 'keyn', 'dict', 'ulti']
 let g:mucomplete#chains.unite = []
-let g:racer_cmd = "/Users/flynn/.cargo/bin/racer"
+let g:racer_cmd = "~/.cargo/bin/racer"
 let g:racer_insert_paren = 1
 let g:rustfmt_autosave = 1
 
 let g:gitgutter_set_sign_backgrounds=0
 
-" let g:python_host_prog = '/usr/local/var/pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/chris/.pyenv/versions/neovim3/bin/python'
+let g:python3_host_prog = "~/.pyenv/versions/neovim3/bin/python"
 
 let g:jedi#completions_enabled = 0
 let g:jedi#use_splits_not_buffers = "right"
 
 " inoremap <expr<tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-let $PATH = "/Users/flynn/src/go/bin/gorename:".$PATH
+let $PATH = "~/src/go/bin/gorename:".$PATH
 "let $GOPATH = "/usr/local/Cellar/go/1.4.2/libexec"
 
 au BufRead,BufNewFile *.go set foldmethod=syntax
@@ -144,7 +146,8 @@ map <leader>p :PrevimOpen<cr>
 map <leader>td <Plug>TaskList
 let g:flake8_ignore="E501,E701,E401,W806"
 autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
-" let g:syntastic_python_checkers=['flake8', 'pyflakes', 'python']
+let g:syntastic_python_exec = "~/.pyenv/versions/neovim3/bin/python"
+let g:syntastic_python_checkers=['flake8', 'python']
 " let g:syntastic_python_flake8_args='--ignore=E501,E701,E401'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -161,7 +164,7 @@ let g:neomake_rust_enabled_markers = ['rustc', 'cargo']
 " $ brew install vale
 let g:neomake_markdown_enabled_markers = ['vale', 'proselint', 'writegood']
 " let g:neomake_ruby_enabled_markers = ['flog', 'mri', 'rubocop', 'reek', 'rubylint']
-" gem install flog reek 
+" gem install flog reek
 let g:neomake_ruby_enabled_markers = ['flog', 'rubocop', 'reek']
 " When writing a buffer (no delay).
 call neomake#configure#automake('w')
@@ -208,7 +211,7 @@ nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
 "     \ }
 
 let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"                                           
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 let g:UltiSnipsListSnippets='<c-CR>'
 let g:UltiSnipsEditSplit="vertical"
@@ -291,7 +294,7 @@ vmap <a-c> "+y
 " imap <C-W> <C-O><C-W>
 
 map <leader>n :NERDTreeToggle<CR>
-nmap <leader>a <Esc>:Ack! 
+nmap <leader>a <Esc>:Ack!
 map <leader>g :GundoToggle<CR>
 
 " Jump to the definition of whatever the cursor is on
@@ -306,7 +309,7 @@ nmap <F3> :TagbarToggle<CR>
 "inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
 " ==========================================================
-" Basic Settings 
+" Basic Settings
 " ==========================================================
 syntax on                     " syntax highlighing
 filetype plugin indent on     " enable loading indent file for filetype
@@ -340,7 +343,7 @@ set showmatch               " Briefly jump to a paren once it's balanced
 set nowrap                  " don't wrap text
 set linebreak               " don't wrap textin the middle of a word
 set autoindent              " always set autoindenting on
-set tabstop=4               " <tab> inserts 4 spaces 
+set tabstop=4               " <tab> inserts 4 spaces
 set shiftwidth=4            " but an indent level is 2 spaces wide.
 set softtabstop=4           " <BS> over an autoindent deletes both spaces.
 set expandtab               " Use spaces, not tabs, for autoindent/tab key.
@@ -371,7 +374,7 @@ set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 
 """" Messages, Info, Status
 set ls=2                    " allways show status line
-"Commenting out below because there's a similar setting in ubuntu and I can 
+"Commenting out below because there's a similar setting in ubuntu and I can
 "make just the title bar flash which doesn't seem to slow down my window
 "like the following does
 "set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
@@ -481,6 +484,7 @@ endfunction
 " let g:jedi#show_call_signatures = "u"
 au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
+let python_highlight_all=1
 
 " ==========================================================
 " Javascript
@@ -494,10 +498,10 @@ au BufReadPost *.cps set syntax=javascript
 au BufNewFile,BufRead *.sah set filetype=sahi
 au! BufNewFile,BufRead *.json set filetype=json
 augroup json_autocmd
-    autocmd FileType json set autoindent 
-    autocmd FileType json set formatoptions=tcq2l 
-    autocmd FileType json set textwidth=78 shiftwidth=2 
-    autocmd FileType json set expandtab 
+    autocmd FileType json set autoindent
+    autocmd FileType json set formatoptions=tcq2l
+    autocmd FileType json set textwidth=78 shiftwidth=2
+    autocmd FileType json set expandtab
     autocmd FileType json set foldmethod=syntax
 augroup END
 
@@ -542,17 +546,18 @@ map <F2> :bd<cr>:syntax on<cr>
 map <leader>f :Files<cr>
 nnoremap <silent> <leader>g :GFiles<cr>
 nnoremap <silent> <leader>o :Buffers<cr>
-nnoremap <silent> <leader>r :Rg! 
+nnoremap <silent> <leader>r :Rg!
 
-" map <leader>f :CtrlPMixed<CR>
-" map <leader>t :CtrlP<CR>
-" map <leader>m :CtrlPMRUFiles<CR>
+map <leader>f :CtrlPMixed<CR>
+map <leader>t :CtrlP<CR>
+map <leader>m :CtrlPMRUFiles<CR>
+map <leader>b :CtrlPBuffer<CR>
 
 map <F4> :NERDTreeToggle<cr>
 map <C-n> :tabnew<cr>
 vmap <silent> <leader>c "+y
 vmap <silent> <leader>p "+p
-nmap <silent> <leader>d "_d 
+nmap <silent> <leader>d "_d
 vmap <silent> <leader>d "_d
 
 let Tlist_Exit_OnlyWindow = 1
