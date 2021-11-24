@@ -1,4 +1,5 @@
 " https://github.com/sontek/dotfiles/
+
 " ==========================================================
 " Dependencies - Libraries/Applications outside of vim
 " ==========================================================
@@ -38,7 +39,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-scripts/YankRing.vim'           		" Maintains a history of previous yanks, changes and deletes http://www.vim.org/scripts/script.php?script_id=1234
-Plug 'psf/black', {'tag': '19.10b0'}			" Python Code formatting/linting
+" Black is commented out because I'm using it via ALE so it's installed in the venv
+" Plug 'psf/black', {'tag': '19.10b0'}			" Python Code formatting/linting
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'rizzatti/dash.vim'				" Dash.app tool
 " Plug 'vim-syntastic/syntastic'  " Using ALE instead
@@ -87,16 +89,34 @@ call plug#end()
 
 let g:python3_host_prog = "~/.pyenv/versions/neovim3/bin/python"
 
+" ==========================================================
+" Python
+" ==========================================================
+" autocmd BufWritePre *.py execute ':Black'
+" au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
+" let g:ale_fixers = {}
+" let g:ale_fixers.python = ['black']
+let b:ale_fixers = {'python': ['black']}
+let g:ale_fix_on_save = 1
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#source('_', 'max_menu_width', 80)
+
+
+call deoplete#custom#option('sources', {
+  \ '_': ['ale'],
+  \ 'python': ['ale', 'jedi'],
+  \})
+
+
+""au BufRead *.py compiler nose
+""au FileType python set omnifunc=pythoncomplete#Complete
+
+
 " set completeopt+=preview
 " set completeopt+=menu,menuone,noinsert,noselect
 " set shortmess+=c   " Shut off completion messages
 " set belloff+=ctrlg " If Vim beeps during completion
 
-let g:deoplete#enable_at_startup = 1
-
-" call deoplete#custom#option('sources', {
-"   \ '_': ['ale'],
-"   \})
 
 let g:jedi#show_call_signatures#popup_on_dot = 0
 " let g:mucomplete#enable_auto_at_startup = 1
@@ -448,17 +468,6 @@ let g:airline_theme='onehalfdark'
 "    return 1
 "endif
 "endfunction
-
-"" ==========================================================
-"" Python
-"" ==========================================================
-""au BufRead *.py compiler nose
-""au FileType python set omnifunc=pythoncomplete#Complete
-"" au FileType python set omnifunc=jedi#complete
-"" let g:jedi#show_call_signatures = "u"
-"au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-"au BufNewFile,BufRead *.py set foldmethod=indent       " allow us to fold on indents
-"let python_highlight_all=1
 
 "" ==========================================================
 "" Javascript
